@@ -1,51 +1,1544 @@
 <!DOCTYPE html>
+<html lang="en"><!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <title>FairHire AI - Smart Recruitment System</title>
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary-color: #3b82f6;
+      --accent-color: #06b6d4;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --danger-color: #ef4444;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
 
-  <title>Fair Hire AI</title>
-  <link rel="stylesheet" href="styles.css" />
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* Enhanced Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d') center/cover;
+      opacity: 0.15;
+      z-index: 1;
+    }
+
+    header .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      padding: 120px 40px;
+      text-align: center;
+    }
+
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      /* Ensure the video is behind the content */
+    }
+
+    header h1 {
+      margin: 0 0 20px 0;
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      animation: slideInUp 1s ease-out;
+    }
+
+    header .subtitle {
+      font-size: 1.25rem;
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: 30px;
+      animation: slideInUp 1s ease-out 0.3s both;
+    }
+
+    header .tagline {
+      font-size: 1rem;
+      opacity: 0.8;
+      font-weight: 500;
+      animation: slideInUp 1s ease-out 0.6s both;
+    }
+
+    /* Enhanced Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      padding: 15px 40px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+      background: rgba(37, 99, 235, 0.1);
+      transform: translateY(-1px);
+    }
+
+    nav a.active {
+      color: var(--primary-color);
+      background: rgba(37, 99, 235, 0.15);
+    }
+
+    /* Enhanced Hero Section */
+    .hero {
+      padding: 100px 40px;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero .content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      font-weight: 400;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .hero .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+      animation: fadeInUp 1s ease-out 0.9s both;
+    }
+
+    .hero .stat {
+      text-align: center;
+    }
+
+    .hero .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      display: block;
+    }
+
+    .hero .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Enhanced Buttons */
+    .btn,
+    .cta-button {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-md);
+      animation: fadeInUp 1s ease-out 0.9s both;
+    }
+
+    .btn:hover,
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    }
+
+    .btn.secondary {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
+    }
+
+    .btn.secondary:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--primary-color);
+    }
+
+    /* Enhanced User Type Selection */
+    .user-type-selection {
+      padding: 80px 40px;
+      background: var(--bg-primary);
+      text-align: center;
+      display: none;
+    }
+
+    .user-type-selection h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .user-type-selection p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+    }
+
+    .user-type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .user-type-card {
+      background: var(--bg-primary);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .user-type-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .user-type-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-color);
+    }
+
+    .user-type-card:hover::before {
+      opacity: 0.05;
+    }
+
+    .user-type-card .icon {
+      font-size: 4rem;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .user-type-card:hover .icon {
+      transform: scale(1.1);
+    }
+
+    .user-type-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .user-type-card p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* Enhanced Application Form */
+    .application-form {
+      padding: 80px 40px;
+      background: var(--bg-secondary);
+      display: none;
+    }
+
+    .application-form h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .form-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg-primary);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: var(--bg-primary);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    /* Enhanced Features Section */
+    .features {
+      padding: 100px 40px;
+      background: var(--bg-tertiary);
+    }
+
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .features .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      background: var(--bg-primary);
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.4s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-card .icon {
+      font-size: 3rem;
+      margin-bottom: 24px;
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover .icon {
+      transform: scale(1.1);
+    }
+
+    .feature-card h3 {
+      margin: 0 0 16px 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    /* Enhanced Login Section */
+    .login-section {
+      padding: 80px 40px;
+      background: var(--bg-primary);
+      display: none;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-box {
+      max-width: 450px;
+      width: 100%;
+      background: var(--bg-primary);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border-color);
+    }
+
+    .form-box h2 {
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .form-box .demo-info {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 16px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 16px;
+      margin: 12px 0;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-box input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Enhanced Dashboard */
+    .dashboard,
+    .ai-insights {
+      padding: 80px 40px;
+      background: var(--bg-primary);
+      display: none;
+    }
+
+    .dashboard h2,
+    .ai-insights h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .dashboard-card {
+      background: var(--bg-secondary);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .dashboard-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .dashboard-card .number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .dashboard-card .label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .ai-insights .insight-card {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+      padding: 30px;
+      border-left: 6px solid var(--primary-color);
+      margin-bottom: 24px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .ai-insights .insight-card:hover {
+      transform: translateX(8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .ai-insights .candidate-name {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+    }
+
+    .ai-insights .match-score {
+      color: var(--success-color);
+      font-weight: 600;
+    }
+
+    /* Enhanced Footer */
+    footer {
+      background: linear-gradient(135deg, var(--text-primary) 0%, #374151 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 40px 40px;
+      margin-top: 80px;
+    }
+
+    footer .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    footer .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    footer .footer-description {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    footer .footer-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    footer .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    footer .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 30px;
+      opacity: 0.7;
+    }
+
+    /* Loading States */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      nav ul {
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Notification Styles */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow-xl);
+      z-index: 10000;
+      transform: translateX(400px);
+      transition: all 0.3s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      border-left: 4px solid var(--success-color);
+    }
+
+    .notification.error {
+      border-left: 4px solid var(--danger-color);
+    }
+  </style>
 </head>
+
 <body>
 
   <header>
-    <h1>Fair Hire AI</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">Apply</a></li>
-        <li><a href="#">Dashboard</a></li>
-      </ul>
-    </nav>
+    <video autoplay muted loop class="background-video">
+      <source src="attached_assets/5971450-uhd_4096_2160_25fps_1751448903358.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="content">
+      <h1>FairHire AI</h1>
+      <p class="subtitle">Smart Recruitment with Built-in Bias Mitigation</p>
+      <p class="tagline">Transforming hiring through AI-powered fairness and efficiency</p>
+    </div>
   </header>
 
-<section class="hero">
-  <h2>Find the right talent. Fast.</h2>
-  <p>Smart recruitment powered by AI and automation.</p>
-  <a href="signup.html" class="btn">Get Started</a>
-</section>
+  <nav id="main-nav">
+    <ul>
+      <li><a href="#" id="nav-home" class="active">Home</a></li>
+      <li><a href="#apply" id="nav-apply">Apply Now</a></li>
+      <li><a href="#dashboard" id="nav-dashboard">Dashboard</a></li>
+      <li><a href="#login" id="nav-login">Admin Login</a></li>
+      <li><a href="#insights" id="nav-insights">AI Insights</a></li>
+    </ul>
+  </nav>
 
+  <section class="hero" id="hero-section">
+    <div class="content">
+      <h2>Find the right talent. Fast and Fair.</h2>
+      <p>Revolutionary recruitment platform powered by AI and automation, designed to eliminate bias and promote
+        diversity in hiring.</p>
 
-  <section class="features">
-    <div class="feature-card">
-      <h3>Post Jobs</h3>
-      <p>Create and manage job openings with ease.</p>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-number">80%</span>
+          <span class="stat-label">Faster Hiring</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">70%</span>
+          <span class="stat-label">Bias Reduction</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">94%</span>
+          <span class="stat-label">Match Accuracy</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">60%</span>
+          <span class="stat-label">Cost Savings</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="#" class="btn" onclick="showUserTypeSelection()">
+          <i class="fas fa-rocket"></i>
+          Get Started Today
+        </a>
+        <a href="presentation.html" class="btn secondary" target="_blank">
+          <i class="fas fa-play"></i>
+          View Demo
+        </a>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>AI Screening</h3>
-      <p>Let our smart algorithm filter top candidates.</p>
+  </section>
+
+  <section class="user-type-selection" id="user-selection">
+    <h2>Choose Your Path</h2>
+    <p>Select how you'd like to use our Smart Recruitment System</p>
+    <div class="user-type-grid">
+      <div class="user-type-card" onclick="showApplicationForm()">
+        <i class="fas fa-user icon"></i>
+        <h3>I'm a Job Candidate</h3>
+        <p>Apply for positions and get AI-powered matching scores with instant feedback on your application strength.
+        </p>
+        <div class="cta-button">
+          <i class="fas fa-arrow-right"></i>
+          Apply Now
+        </div>
+      </div>
+      <div class="user-type-card" onclick="showRecruiterLogin()">
+        <i class="fas fa-briefcase icon"></i>
+        <h3>I'm a Recruiter/HR Professional</h3>
+        <p>Access the comprehensive admin dashboard to manage applications, track diversity metrics, and streamline
+          hiring.</p>
+        <div class="cta-button">
+          <i class="fas fa-sign-in-alt"></i>
+          Access Dashboard
+        </div>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>Track Applicants</h3>
-      <p>View, rate, and contact applicants quickly.</p>
+  </section>
+
+  <section class="application-form" id="application-form">
+    <h2>Submit Your Application</h2>
+    <div class="form-container">
+      <form class="form-grid" onsubmit="submitApplication(event)">
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="+27 123 456 7890">
+        </div>
+        <div class="form-group">
+          <label for="position">Desired Position *</label>
+          <select id="position" name="position" required>
+            <option value="">Select a position</option>
+            <option value="software-developer">Software Developer</option>
+            <option value="data-scientist">Data Scientist</option>
+            <option value="product-manager">Product Manager</option>
+            <option value="ux-designer">UX Designer</option>
+            <option value="marketing-specialist">Marketing Specialist</option>
+            <option value="business-analyst">Business Analyst</option>
+            <option value="project-manager">Project Manager</option>
+            <option value="ai-engineer">AI Engineer</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="skills">Key Skills (comma-separated) *</label>
+          <input type="text" id="skills" name="skills"
+            placeholder="e.g., JavaScript, Python, React, Machine Learning, Leadership" required>
+        </div>
+        <div class="form-group">
+          <label for="experience">Years of Experience *</label>
+          <select id="experience" name="experience" required>
+            <option value="">Select experience level</option>
+            <option value="0-1">0-1 years (Entry Level)</option>
+            <option value="2-4">2-4 years (Junior)</option>
+            <option value="5-7">5-7 years (Mid-level)</option>
+            <option value="8-10">8-10 years (Senior)</option>
+            <option value="10+">10+ years (Expert)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="education">Highest Education</label>
+          <select id="education" name="education">
+            <option value="">Select education level</option>
+            <option value="high-school">High School</option>
+            <option value="diploma">Diploma/Certificate</option>
+            <option value="bachelors">Bachelor's Degree</option>
+            <option value="masters">Master's Degree</option>
+            <option value="phd">PhD</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="motivation">Why are you interested in this role? (Optional)</label>
+          <textarea id="motivation" name="motivation" rows="4"
+            placeholder="Tell us what motivates you and why you're the perfect fit..."></textarea>
+        </div>
+        <div class="form-group full-width">
+          <div class="form-actions">
+            <button type="submit" class="cta-button">
+              <i class="fas fa-paper-plane"></i>
+              Submit Application
+            </button>
+            <button type="button" class="btn secondary" onclick="goBack()">
+              <i class="fas fa-arrow-left"></i>
+              Back
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="features" id="features-section">
+    <div class="features-container">
+      <h2>Powerful Features for Modern Recruitment</h2>
+      <p class="subtitle">Everything you need to build diverse, high-performing teams</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-robot icon"></i>
+          <h3>AI-Powered Screening</h3>
+          <p>Advanced algorithms analyze resumes and match candidates based on skills, experience, and cultural fit
+            while eliminating unconscious bias.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-balance-scale icon"></i>
+          <h3>Bias Mitigation Engine</h3>
+          <p>Built-in fairness algorithms ensure equal opportunities for all candidates, promoting diversity and
+            inclusive hiring practices.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-chart-line icon"></i>
+          <h3>Smart Analytics Dashboard</h3>
+          <p>Real-time insights into your hiring pipeline, diversity metrics, and candidate performance with actionable
+            recommendations.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-lightning-bolt icon"></i>
+          <h3>Instant Processing</h3>
+          <p>Get candidate evaluations in under 3 seconds with comprehensive scoring and detailed feedback for better
+            decision-making.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-shield-alt icon"></i>
+          <h3>Enterprise Security</h3>
+          <p>GDPR-compliant data handling with enterprise-grade security measures to protect sensitive candidate
+            information.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-users icon"></i>
+          <h3>Team Collaboration</h3>
+          <p>Seamless collaboration tools for hiring teams with role-based access controls and comprehensive audit
+            trails.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="login-section" id="login">
+    <div class="form-box">
+      <h2>Admin Portal</h2>
+      <div class="demo-info">
+        <p><strong>Demo Credentials</strong></p>
+        <p>Username: <code>admin</code></p>
+        <p>Password: <code>fairhire2025</code></p>
+      </div>
+      <form onsubmit="handleLogin(event)">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit" class="cta-button" style="width:100%; margin-top: 20px;">
+          <i class="fas fa-sign-in-alt"></i>
+          Login to Dashboard
+        </button>
+      </form>
+      <button type="button" class="btn secondary" style="width:100%; margin-top: 15px;" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+        Back
+      </button>
+    </div>
+  </section>
+
+  <section class="dashboard" id="dashboard">
+    <h2>Recruitment Dashboard</h2>
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <h3>Total Applications</h3>
+        <div class="number">247</div>
+        <div class="label">This month</div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Shortlisted Candidates</h3>
+        <div class="number">68</div>
+        <div class="label">Ready for interview</div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Interviews Scheduled</h3>
+        <div class="number">23</div>
+        <div class="label">Next 7 days</div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Diversity Score</h3>
+        <div class="number">89%</div>
+        <div class="label">Above target</div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Average Processing Time</h3>
+        <div class="number">2.3s</div>
+        <div class="label">Per application</div>
+      </div>
+      <div class="dashboard-card">
+        <h3>Bias Mitigation Score</h3>
+        <div class="number">94%</div>
+        <div class="label">Excellent performance</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-insights" id="insights">
+    <h2>AI-Driven Candidate Insights</h2>
+    <div class="insight-card">
+      <div class="candidate-name">Sarah Johnson</div>
+      <div><span class="match-score">96% Match</span> - Exceptional Python skills, strong leadership experience, perfect
+        cultural alignment. Recommended for immediate interview.</div>
+    </div>
+    <div class="insight-card">
+      <div class="candidate-name">Michael Chen</div>
+      <div><span class="match-score">89% Match</span> - Excellent technical background in data science, minor
+        communication gaps identified. Consider for technical round.</div>
+    </div>
+    <div class="insight-card">
+      <div class="candidate-name">Aisha Patel</div>
+      <div><span class="match-score">92% Match</span> - Outstanding problem-solving abilities, moderate leadership
+        experience. High potential for growth role.</div>
+    </div>
+    <div class="insight-card">
+      <div class="candidate-name">James Rodriguez</div>
+      <div><span class="match-score">87% Match</span> - Strong full-stack development skills, good team collaboration
+        history. Suitable for mid-level position.</div>
+    </div>
+    <div class="insight-card">
+      <div class="candidate-name">Fatima Al-Zahra</div>
+      <div><span class="match-score">91% Match</span> - Impressive AI/ML expertise, excellent academic background.
+        Perfect for our data science team.</div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 Smart Recruitment System. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-brand">FairHire AI</div>
+      <div class="footer-description">
+        Revolutionizing recruitment through artificial intelligence and bias mitigation. Building fairer, more diverse
+        workplaces for the future.
+      </div>
+      <div class="footer-links">
+        <a href="#about" onclick="showSection('about')">About Us</a>
+        <a href="#features" onclick="showSection('features')">Features</a>
+        <a href="#pricing" onclick="showSection('pricing')">Pricing</a>
+        <a href="#contact" onclick="showSection('contact')">Contact</a>
+        <a href="#privacy" onclick="showSection('privacy')">Privacy Policy</a>
+        <a href="#terms" onclick="showSection('terms')">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 FairHire AI - Smart Recruitment System. All rights reserved.</p>
+      <p>Built with care by Team Syntax Serpents for CAPACITI Hackathon 2025</p>
+    </div>
   </footer>
 
+  <div id="about" class="content-section" style="display: none;">
+    <h2>About Us</h2>
+    <p>FairHire AI aims to enhance the recruitment process through innovative AI technologies that minimize biases and
+      promote a diverse workforce. Our team is dedicated to creating a fair hiring system that supports candidates from
+      all backgrounds.</p>
+  </div>
+
+  <div id="features" class="content-section" style="display: none;">
+    <h2>Features</h2>
+    <p>Our platform offers robust features including:</p>
+    <ul>
+      <li>AI-Powered Screening and Evaluation</li>
+      <li>Bias Mitigation Engine</li>
+      <li>Comprehensive Analytics Dashboard</li>
+      <li>GDPR-compliant Data Handling</li>
+    </ul>
+  </div>
+
+  <div id="pricing" class="content-section" style="display: none;">
+    <h2>Pricing</h2>
+    <p>We offer various subscription plans tailored to meet the needs of businesses:</p>
+    <ul>
+      <li>Basic Plan: $99/month</li>
+      <li>Pro Plan: $499/month</li>
+      <li>Enterprise Solutions: Contact us for a custom quote.</li>
+    </ul>
+  </div>
+
+  <div id="contact" class="content-section" style="display: none;">
+    <h2>Contact</h2>
+    <p>For inquiries or support, please reach out to us at <a href="mailto:team@fairhire.ai">team@fairhire.ai</a>.</p>
+  </div>
+
+  <div id="privacy" class="content-section" style="display: none;">
+    <h2>Privacy Policy</h2>
+    <p>We value your privacy and are committed to protecting your personal data. Our policies outline how we collect,
+      use, and safeguard your information.</p>
+  </div>
+
+  <div id="terms" class="content-section" style="display: none;">
+    <h2>Terms of Service</h2>
+    <p>By using FairHire AI, you agree to our terms and conditions. Ensure you read them fully to understand your rights
+      and responsibilities.</p>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => {
+        if (section.id === sectionId) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    }
+    // Enhanced global state management
+    let isRecruiterLoggedIn = false;
+    let currentSection = 'home';
+    let animationQueue = [];
+
+    // Enhanced notification system
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}" style="color: var(--${type === 'success' ? 'success' : 'danger'}-color);"></i>
+          <span>${message}</span>
+        </div>
+      `;
+
+      document.body.appendChild(notification);
+
+      setTimeout(() => notification.classList.add('show'), 100);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => document.body.removeChild(notification), 300);
+      }, 4000);
+    }
+
+    // Enhanced navigation with smooth transitions
+    function showUserTypeSelection() {
+      updateActiveSection('user-selection');
+      hideAllSections();
+      document.querySelector('#user-selection').style.display = 'block';
+      updateNavigation('apply');
+    }
+
+    function showApplicationForm() {
+      updateActiveSection('application-form');
+      hideAllSections();
+      document.querySelector('#application-form').style.display = 'block';
+      updateNavigation('apply');
+    }
+
+    function showRecruiterLogin() {
+      updateActiveSection('login');
+      hideAllSections();
+      document.querySelector('#login').style.display = 'block';
+      updateNavigation('login');
+    }
+
+    function goBack() {
+      if (document.querySelector('#user-selection').style.display === 'block') {
+        navigateToSection('home');
+      } else {
+        showUserTypeSelection();
+      }
+    }
+
+    // Enhanced application submission with better UX
+    function submitApplication(event) {
+      event.preventDefault();
+
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      const originalHTML = submitBtn.innerHTML;
+
+      // Show loading state
+      submitBtn.innerHTML = '<div class="loading"></div> Processing...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(event.target);
+      const applicationData = Object.fromEntries(formData);
+
+      // Enhanced AI simulation with realistic processing
+      setTimeout(() => {
+        const skillsCount = applicationData.skills.split(',').length;
+        const experienceMultiplier = getExperienceMultiplier(applicationData.experience);
+        const educationBonus = getEducationBonus(applicationData.education);
+
+        // More sophisticated scoring algorithm
+        const baseScore = Math.floor(Math.random() * 20) + 70;
+        const skillsBonus = Math.min(skillsCount * 2, 15);
+        const matchScore = Math.min(baseScore + skillsBonus + experienceMultiplier + educationBonus, 98);
+        const biasScore = Math.floor(Math.random() * 15) + 85;
+        const diversityImpact = Math.floor(Math.random() * 10) + 5;
+
+        // Enhanced feedback message
+        const feedback = generateDetailedFeedback(matchScore, applicationData);
+
+        showNotification(`Application submitted successfully! Match Score: ${matchScore}% | Bias-Free Score: ${biasScore}%`, 'success');
+
+        setTimeout(() => {
+          alert(`🎉 Application Analysis Complete!\n\n` +
+            `📊 SCORES:\n` +
+            `• Match Score: ${matchScore}%\n` +
+            `• Bias-Free Score: ${biasScore}%\n` +
+            `• Diversity Impact: +${diversityImpact}%\n\n` +
+            `🤖 AI FEEDBACK:\n${feedback}\n\n` +
+            `📋 STATUS: Under Review\n` +
+            `⏰ NEXT STEPS: You will be contacted within 2-3 business days.\n\n` +
+            `Thank you for choosing FairHire AI!`);
+
+          // Reset form and navigate back
+          submitBtn.innerHTML = originalHTML;
+          submitBtn.disabled = false;
+          event.target.reset();
+          goBack();
+        }, 1000);
+      }, 2500);
+    }
+
+    // Helper functions for scoring
+    function getExperienceMultiplier(experience) {
+      const multipliers = {
+        '0-1': 2,
+        '2-4': 4,
+        '5-7': 6,
+        '8-10': 8,
+        '10+': 10
+      };
+      return multipliers[experience] || 0;
+    }
+
+    function getEducationBonus(education) {
+      const bonuses = {
+        'high-school': 1,
+        'diploma': 2,
+        'bachelors': 3,
+        'masters': 4,
+        'phd': 5
+      };
+      return bonuses[education] || 0;
+    }
+
+    function generateDetailedFeedback(score, data) {
+      if (score >= 95) {
+        return "Exceptional candidate profile! Strong alignment with role requirements and excellent skill diversity.";
+      } else if (score >= 85) {
+        return "Strong candidate with relevant experience. Consider for immediate interview process.";
+      } else if (score >= 75) {
+        return "Good potential candidate. Some skill gaps identified but overall suitable for the role.";
+      } else {
+        return "Candidate shows promise but may need additional development in key areas.";
+      }
+    }
+
+    // Enhanced login handling
+    function handleLogin(event) {
+      event.preventDefault();
+
+      const submitBtn = event.target.querySelector('button[type="submit"]');
+      const originalHTML = submitBtn.innerHTML;
+
+      submitBtn.innerHTML = '<div class="loading"></div> Authenticating...';
+      submitBtn.disabled = true;
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      setTimeout(() => {
+        if (username === 'admin' && password === 'fairhire2025') {
+          isRecruiterLoggedIn = true;
+          showNotification('Login successful! Welcome to the admin dashboard.', 'success');
+
+          setTimeout(() => {
+            hideAllSections();
+            document.querySelector('#dashboard').style.display = 'block';
+            document.querySelector('#insights').style.display = 'block';
+            updateNavigation('dashboard');
+            event.target.reset();
+          }, 1000);
+        } else {
+          showNotification('Invalid credentials. Please check your username and password.', 'error');
+        }
+
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+      }, 1500);
+    }
+
+    // Enhanced navigation system
+    function navigateToSection(targetId) {
+      updateActiveSection(targetId);
+      hideAllSections();
+
+      switch (targetId) {
+        case '':
+        case 'home':
+          document.querySelector('#hero-section').style.display = 'block';
+          document.querySelector('#features-section').style.display = 'block';
+          updateNavigation('home');
+          break;
+        case 'apply':
+          showUserTypeSelection();
+          break;
+        case 'login':
+          document.querySelector('#login').style.display = 'flex';
+          updateNavigation('login');
+          break;
+        case 'dashboard':
+          if (isRecruiterLoggedIn) {
+            document.querySelector('#dashboard').style.display = 'block';
+            updateNavigation('dashboard');
+          } else {
+            showNotification('Please log in to access the dashboard.', 'error');
+            showRecruiterLogin();
+          }
+          break;
+        case 'insights':
+          if (isRecruiterLoggedIn) {
+            document.querySelector('#insights').style.display = 'block';
+            updateNavigation('insights');
+          } else {
+            showNotification('Please log in to access AI insights.', 'error');
+            showRecruiterLogin();
+          }
+          break;
+      }
+
+      // Smooth scroll to target
+      const targetSection = document.getElementById(targetId) || document.querySelector('#hero-section');
+      if (targetSection && targetSection.style.display !== 'none') {
+        targetSection.scrollIntoView({behavior: 'smooth'});
+      }
+    }
+
+    function hideAllSections() {
+      const sections = ['#hero-section', '#features-section', '#user-selection', '#application-form', '#login'];
+      sections.forEach(selector => {
+        const element = document.querySelector(selector);
+        if (element) element.style.display = 'none';
+      });
+
+      if (!isRecruiterLoggedIn) {
+        document.querySelector('#dashboard').style.display = 'none';
+        document.querySelector('#insights').style.display = 'none';
+      }
+    }
+
+    function updateActiveSection(sectionId) {
+      currentSection = sectionId;
+    }
+
+    function updateNavigation(activeId) {
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      const activeLink = document.querySelector(`#nav-${activeId}`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
+
+    // Enhanced navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Enhanced event listeners
+    document.addEventListener('DOMContentLoaded', function () {
+      // Navbar click handling
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          const targetId = href === '#' ? '' : href.substring(1);
+          navigateToSection(targetId);
+        });
+      });
+
+      // Form validation enhancements
+      const inputs = document.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        input.addEventListener('blur', validateField);
+        input.addEventListener('input', clearValidationError);
+      });
+    });
+
+    function validateField(event) {
+      const field = event.target;
+      const value = field.value.trim();
+
+      if (field.hasAttribute('required') && !value) {
+        showFieldError(field, 'This field is required');
+      } else if (field.type === 'email' && value && !isValidEmail(value)) {
+        showFieldError(field, 'Please enter a valid email address');
+      } else {
+        clearFieldError(field);
+      }
+    }
+
+    function showFieldError(field, message) {
+      clearFieldError(field);
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'field-error';
+      errorDiv.style.color = 'var(--danger-color)';
+      errorDiv.style.fontSize = '0.875rem';
+      errorDiv.style.marginTop = '4px';
+      errorDiv.textContent = message;
+      field.parentNode.appendChild(errorDiv);
+      field.style.borderColor = 'var(--danger-color)';
+    }
+
+    function clearFieldError(field) {
+      const existingError = field.parentNode.querySelector('.field-error');
+      if (existingError) {
+        existingError.remove();
+      }
+      field.style.borderColor = '';
+    }
+
+    function clearValidationError(event) {
+      clearFieldError(event.target);
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function () {
+      navigateToSection('home');
+    });
+  </script>
 </body>
-</html>
+
+<
