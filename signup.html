@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Recruitment System</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Fair Hire AI</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+        <li><a href="apply.html">Apply</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="content">
+    <h2>Create an Account</h2>
+    <form class="form" id="signupForm">
+      <label for="firstName">Name:</label>
+      <input type="text" id="firstName" required>
+
+      <label for="lastName">Surname:</label>
+      <input type="text" id="lastName" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="password">Create Password:</label>
+      <input type="password" id="password" required>
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" required>
+
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+  </section>
+
+  <!-- Firebase SDKs (MUST be before the script that uses them) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+
+  <!-- Firebase Config & App Logic -->
+  <script>
+    // ✅ Initialize Firebase AFTER the SDK is loaded
+    const firebaseConfig = {
+      apiKey: "AIzaSyD4ZsRT-YrTYQHC6_GLmcp88HevsuQTK8w",
+      authDomain: "fairhireai-1801f.firebaseapp.com",
+      projectId: "fairhireai-1801f",
+      storageBucket: "fairhireai-1801f.appspot.com",
+      messagingSenderId: "834486048706",
+      appId: "1:834486048706:web:8b7c847466d5ee43f4e85b",
+      measurementId: "G-BZ7DK84Y7D"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const signupForm = document.getElementById("signupForm");
+
+    signupForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      try {
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Send email verification
+        await user.sendEmailVerification();
+        alert("Account created! A verification link has been sent to your email.");
+
+        signupForm.reset();
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
