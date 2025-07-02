@@ -159,4 +159,22 @@ footer {
   max-width: 600px;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
+.form button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.form button:hover {
+  background-color: #2471a3;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 80vh;
+}
 
