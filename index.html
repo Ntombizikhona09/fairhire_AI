@@ -912,6 +912,344 @@
     .notification.error {
       border-left: 4px solid var(--danger-color);
     }
+
+    /* --- CHATBOT STYLING --- */
+
+  /* Main Chat Toggle Button */
+  .chat-toggle-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 20px;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1000;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .chat-toggle-button:hover {
+      background-color: var(--dark-primary-color);
+      transform: translateY(-2px);
+  }
+
+  .chat-toggle-button i {
+      font-size: 1.3em;
+  }
+
+  /* Chat Window Container */
+  #chat-window {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 999;
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+      transform-origin: bottom right;
+  }
+
+  /* Hidden state for the chat window */
+  #chat-window.hidden {
+      transform: scale(0.7) translate(50%, 50%);
+      opacity: 0;
+      pointer-events: none;
+  }
+
+  /* Chat Header (for dragging) */
+  .chat-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1em;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      cursor: grab;
+  }
+
+  .chat-header h3 {
+      margin: 0;
+      font-weight: 500;
+  }
+
+  /* Close Chat Button inside header */
+  #close-chat {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 5px;
+      transition: background-color 0.2s ease;
+  }
+
+  #close-chat:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Chat Messages Area */
+  #chat-messages {
+      flex-grow: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      scroll-behavior: smooth;
+  }
+
+  /* Individual Message Styles */
+  .message {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      max-width: 85%;
+  }
+
+  .message-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: 5px;
+  }
+
+  .user-message {
+      justify-content: flex-end;
+      margin-left: auto;
+  }
+
+  .user-message .message-avatar {
+      order: 2;
+      margin-right: 0;
+      margin-left: 8px;
+  }
+
+  .bot-message {
+      justify-content: flex-start;
+      margin-right: auto;
+  }
+
+  .bot-message .message-avatar {
+      order: 1;
+      margin-right: 8px;
+      margin-left: 0;
+  }
+
+  .message-content {
+      padding: 10px 15px;
+      border-radius: 20px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      font-size: 0.95em;
+      line-height: 1.4;
+  }
+
+  .user-message .message-content {
+      background-color: var(--primary-color);
+      color: white;
+      border-bottom-right-radius: 5px;
+  }
+
+  .bot-message .message-content {
+      background-color: #e0e0e0;
+      color: #333;
+      border-bottom-left-radius: 5px;
+  }
+
+  /* Markdown styling within messages */
+  .message-content p:first-child {
+      margin-top: 0;
+  }
+  .message-content p:last-child {
+      margin-bottom: 0;
+  }
+  .message-content a {
+      color: var(--primary-color);
+      text-decoration: underline;
+  }
+  .message-content ul, .message-content ol {
+      padding-left: 20px;
+      margin-bottom: 0;
+  }
+  .message-content li {
+      margin-bottom: 5px;
+  }
+  .message-content strong {
+      font-weight: bold;
+  }
+
+  /* Typing Indicator */
+  .typing-indicator .message-content {
+      font-style: italic;
+      color: #777;
+      background-color: #e0e0e0;
+      animation: pulse 1.5s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+      0% { opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { opacity: 0.5; }
+  }
+
+  /* Chat Input Area */
+  .chat-input-area {
+      display: flex;
+      padding: 15px;
+      border-top: 1px solid #eee;
+      background-color: white;
+  }
+
+  #user-input {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 1em;
+      margin-right: 10px;
+      transition: border-color 0.3s ease;
+  }
+
+  #user-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 66, 133, 244), 0.2);
+  }
+
+  #send-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  #send-button:hover {
+      background-color: var(--dark-primary-color);
+      transform: translateY(-1px);
+  }
+
+  #send-button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+  }
+
+  /* New Chat Button */
+  #new-chat-button {
+      background-color: #f1f1f1;
+      color: #555;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 0.9em;
+      cursor: pointer;
+      margin: 10px 15px 15px 15px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      text-align: center;
+  }
+
+  #new-chat-button:hover {
+      background-color: #e0e0e0;
+      border-color: #ccc;
+  }
+
+  /* Quick Replies */
+  .quick-replies-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 5px;
+      border-top: 1px dashed #eee;
+      justify-content: center;
+  }
+
+  .quick-reply-button {
+      background-color: #e0f2f7;
+      color: #007bff;
+      border: 1px solid #b3e5fc;
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 0.85em;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+  }
+
+  .quick-reply-button:hover {
+      background-color: #cce9f5;
+      transform: translateY(-1px);
+  }
+
+  /* Basic Notification Styling (if you use showNotification) */
+  .notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #f0f0f0;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      font-size: 1em;
+      color: #333;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+
+  .notification.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+  }
+
+  .notification.success {
+      background-color: #e6ffe6;
+      border: 1px solid #4CAF50;
+      color: #333;
+  }
+
+  .notification.error {
+      background-color: #ffe6e6;
+      border: 1px solid #f44336;
+      color: #333;
+  }
+
+  /* Optional: Define some primary colors if not already in your CSS */
+  :root {
+      --primary-color: #007bff;
+      --dark-primary-color: #0056b3;
+      --primary-color-rgb: 0, 123, 255;
+      --success-color: #28a745;
+      --danger-color: #dc3545;
+  }
   </style>
 </head>
 
@@ -1387,7 +1725,76 @@
       and responsibilities.</p>
   </div>
 
+  <div id="notification-container"></div> <div class="chat-window hidden" id="chat-window">
+    <div class="chat-header">
+        <h3>FairHire AI Assistant</h3>
+        <button id="close-chat" class="close-button">X</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        </div>
+    <div class="chat-input-area">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button id="send-button">Send</button>
+    </div>
+    <button id="new-chat-button" class="new-chat-button">New Chat</button>
+  </div>
+
+  <button class="chat-toggle-button" id="chat-button">
+    <i class="fas fa-comments"></i> Chat
+  </button>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
+     // --- IMPORTANT: REPLACE 'YOUR_GEMINI_API_KEY' WITH YOUR ACTUAL API KEY ---
+    const GEMINI_API_KEY = 'AIzaSyBho2m-u0hump6aZxLaJ2QIexrcFafTm0A'; // Your API Key
+    // --------------------------------------------------------------------------
+
+    // Define the correct API URL with the working model
+    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`; // FIX: Changed model to gemini-1.5-flash-latest
+
+    // Define initial system message for context (from old working script)
+    const initialSystemMessage = {
+        role: "user",
+        parts: [{ text: `
+            You are an AI-powered virtual assistant for a Smart Recruitment System called "FairHire AI".
+            Your primary purpose is to assist users (both job seekers and potential recruiters/hiring managers) by providing information directly related to the platform's functionalities.
+
+            Focus on the following key areas of the Smart Recruitment System:
+
+            1.  **Automated Applications & Screening:**
+                * How the system streamlines application intake.
+                * How AI intelligently filters candidates based on skills, experience, and potential.
+                * The general application process (e.g., submitting resumes, required formats).
+                * How the AI helps identify top candidates efficiently.
+
+            2.  **Data-Driven Talent Insights:**
+                * How advanced analytics are used to assess candidate fit.
+                * The system's role in ensuring fair and evidence-based decision-making.
+                * How it helps reduce human bias in selection.
+
+            3.  **Efficient & Scalable Recruitment:**
+                * How the platform reduces manual tasks for recruiters.
+                * How it accelerates hiring.
+                * Its capability to identify top talent quickly and accurately.
+
+            General Guidelines:
+            * Keep responses concise, helpful, and directly relevant to the Smart Recruitment System.
+            * Maintain a professional and friendly tone.
+            * Do NOT mention that you are an AI model unless directly asked.
+            * If a question is outside the scope of the recruitment platform's functionalities (e.g., general career advice, personal data security specifics beyond what the platform publicly states, or unrelated topics like weather), politely state that you can only answer questions related to the Smart Recruitment System.
+            * If asked about a feature that isn't explicitly mentioned above, you can give a general positive answer if it aligns with a smart recruitment system, or state that the specific detail might vary or isn't a core feature currently.
+            * When providing information that could lead to an action (like applying, viewing jobs, or learning more about a specific feature, wanting to learn more about FairHire AI), please include a relevant hyperlink formatted in Markdown. Use placeholder URLs like 'file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#about', 'file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#apply', 'https://fairhireai.com/about-ai-screening', 'file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#login', etc. For example: "To view more info on FairHire AI, please visit our [About Page](file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#about.)"
+            * You can encourage users to visit specific sections of the website, like "Jobs" or "Apply" or "Features" or "Pricing", if relevant.
+        `}]
+    };
+
+    const initialBotGreeting = {
+        role: "model",
+        parts: [{ text: "Hi there! I'm the Smart Recruiter Bot. How can I help you today regarding our Smart Recruitment System?" }]
+    };
+
+    // Store conversation history for context (important for chat models)
+    let conversationHistory = []; // Initialized here, will be populated by resetChat()
+
     // Enhanced global state management
     let isRecruiterLoggedIn = false;
     let currentSection = 'home';
@@ -1741,6 +2148,303 @@
     document.addEventListener('DOMContentLoaded', function () {
       navigateToSection('home');
     });
+
+    // --- CHATBOT FUNCTIONALITY (REVISED & MERGED) ---
+    // Get chat elements using your HTML IDs
+    const chatButton = document.getElementById('chat-button');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChatButton = document.getElementById('close-chat');
+    const chatMessages = document.getElementById('chat-messages');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const newChatButton = document.getElementById('new-chat-button');
+
+    let typingIndicatorElement = null; // To hold the typing indicator element
+
+    // Event Listeners for Chatbot (from old working script, adapted for new IDs)
+    // Check if elements exist before adding listeners to prevent errors if HTML is malformed
+    if (chatButton) {
+        chatButton.addEventListener('click', () => {
+            chatWindow.classList.toggle('hidden');
+            if (!chatWindow.classList.contains('hidden')) {
+                userInput.focus(); // Focus input when chat opens
+                scrollToBottom();
+                displayQuickReplies([
+                    "How do I apply for a job?",
+                    "Tell me about AI screening.",
+                    "What kind of jobs do you have?",
+                    "How does it ensure fairness?",
+                    "Benefits for recruiters?"
+                ]);
+            }
+        });
+    }
+
+    if (closeChatButton) {
+        closeChatButton.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+        });
+    }
+
+    if (sendButton) {
+        sendButton.addEventListener('click', sendMessage);
+    }
+
+    if (userInput) {
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+
+    if (newChatButton) {
+        newChatButton.addEventListener('click', resetChat);
+    }
+
+    // Function to reset the chat (from old working script)
+    function resetChat() {
+        if (!chatMessages) { // Add null check
+            console.error("chatMessages element not found. Cannot reset chat.");
+            return;
+        }
+        chatMessages.innerHTML = ''; // Clear all messages from the display
+        conversationHistory = [initialSystemMessage, initialBotGreeting]; // Reset history to initial state
+        appendMessage("Hi there! I'm the Smart Recruiter Bot. How can I help you today regarding our Smart Recruitment System?", 'bot-message'); // Re-display initial greeting
+        displayQuickReplies([ // Re-display initial quick replies
+            "Tell me about FairHire AI.",
+            "Tell me about AI screening.",
+            "How does it ensure fairness?",
+            "Benefits for recruiters?"
+        ]);
+        if (userInput) { // Add null check
+            userInput.focus();
+        }
+        scrollToBottom();
+    }
+
+    // Main sendMessage function (merged from old working script)
+    async function sendMessage() {
+        const messageText = userInput.value.trim();
+        if (messageText === '') return;
+
+        appendMessage(messageText, 'user-message');
+        userInput.value = '';
+
+        // Remove existing quick reply buttons
+        const existingQuickReplies = chatMessages.querySelectorAll('.quick-replies-container');
+        existingQuickReplies.forEach(container => container.remove());
+
+        conversationHistory.push({ role: "user", parts: [{ text: messageText }] });
+
+        if (userInput) userInput.disabled = true;
+        if (sendButton) sendButton.disabled = true;
+
+        typingIndicatorElement = createTypingIndicator(); // Create and append the indicator
+
+        try {
+            const botResponse = await getAIResponse(conversationHistory); // Renamed from generateBotResponse to match old script
+
+            if (typingIndicatorElement && typingIndicatorElement.parentNode) {
+                typingIndicatorElement.remove();
+            }
+
+            appendMessage(botResponse, 'bot-message');
+            conversationHistory.push({ role: "model", parts: [{ text: botResponse }] });
+
+        } catch (error) {
+            console.error("Error getting AI response:", error);
+            if (typingIndicatorElement && typingIndicatorElement.parentNode) {
+                typingIndicatorElement.remove();
+            }
+            // Use more specific error messages as per the original script's try-catch
+            if (error.message.includes('status 400')) {
+                appendMessage("I encountered an error connecting to the AI (400 Bad Request). This usually means there's an issue with the prompt or the request structure. Please try rephrasing your question.", 'bot-message');
+            } else if (error.message.includes('status 404')) {
+                 appendMessage("Sorry, I'm having trouble finding the AI model. There might be an issue with the service endpoint or model availability. (404 Not Found)", 'bot-message');
+            } else if (error.message.includes('status 401') || error.message.includes('status 403')) {
+                appendMessage("I'm sorry, I couldn't authenticate with the AI service. Please ensure my API key is correct and has the necessary permissions.", 'bot-message');
+            }
+            else {
+                appendMessage("Sorry, I'm having trouble connecting right now. Please try again later.", 'bot-message');
+            }
+        } finally {
+            if (userInput) userInput.disabled = false;
+            if (sendButton) sendButton.disabled = false;
+            if (userInput) userInput.focus();
+            scrollToBottom();
+        }
+    }
+
+    // Function to create and append the typing indicator (from old working script)
+    function createTypingIndicator() {
+        if (!chatMessages) return null; // Null check for chatMessages
+
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', 'bot-message', 'typing-indicator');
+
+        const avatarImg = document.createElement('img');
+        avatarImg.classList.add('message-avatar');
+        avatarImg.src = 'C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/images/logo.png';
+        avatarImg.alt = 'FairHire AI';
+        messageDiv.prepend(avatarImg);
+
+        const textContentDiv = document.createElement('div');
+        textContentDiv.classList.add('message-content');
+        textContentDiv.innerHTML = '...';
+        messageDiv.appendChild(textContentDiv);
+
+        chatMessages.appendChild(messageDiv);
+        scrollToBottom();
+        return messageDiv;
+    }
+
+    // UPDATED appendMessage function to handle single string or array of classes (from old working script)
+    function appendMessage(text, type) {
+        if (!chatMessages) return; // Null check for chatMessages
+
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message');
+
+        if (Array.isArray(type)) {
+            messageDiv.classList.add(...type);
+        } else {
+            messageDiv.classList.add(type);
+        }
+
+        const avatarImg = document.createElement('img');
+        avatarImg.classList.add('message-avatar');
+
+        if (messageDiv.classList.contains('user-message')) {
+            avatarImg.src = 'c:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/images/user.png';
+            avatarImg.alt = 'You';
+        } else if (messageDiv.classList.contains('bot-message')) {
+            avatarImg.src = 'C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/images/logo.png';
+            avatarImg.alt = 'FairHire AI';
+        }
+        messageDiv.prepend(avatarImg);
+
+        const textContentDiv = document.createElement('div');
+        textContentDiv.classList.add('message-content');
+
+        // Markdown parsing for bot messages
+        if (typeof marked !== 'undefined' && messageDiv.classList.contains('bot-message')) { // Check if marked is defined
+            textContentDiv.innerHTML = marked.parse(text); // Ensure marked.js is loaded in HTML
+        } else {
+            textContentDiv.innerHTML = text;
+        }
+        messageDiv.appendChild(textContentDiv);
+
+        chatMessages.appendChild(messageDiv);
+        scrollToBottom();
+    }
+
+    // Function to display quick reply buttons (from old working script)
+    function displayQuickReplies(questions) {
+        if (!chatMessages) return; // Null check for chatMessages
+
+        const quickRepliesContainer = document.createElement('div');
+        quickRepliesContainer.classList.add('quick-replies-container');
+
+        questions.forEach(question => {
+            const button = document.createElement('button');
+            button.classList.add('quick-reply-button');
+            button.textContent = question;
+            button.addEventListener('click', () => {
+                if (userInput) { // Add null check
+                    userInput.value = question;
+                }
+                sendMessage();
+            });
+            quickRepliesContainer.appendChild(button);
+        });
+        chatMessages.appendChild(quickRepliesContainer);
+        scrollToBottom();
+    }
+
+    // Renamed from getAIResponse to generateBotResponse for consistency with your previous naming,
+    // but the logic inside is from the old working script (uses history)
+    async function getAIResponse(history) { // Takes conversation history
+        if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
+            console.error("GEMINI_API_KEY is not set or is still the placeholder. Cannot connect to AI.");
+            throw new Error(`AI API Key is missing or incorrect.`);
+        }
+
+        const requestBody = {
+            contents: history // Pass the entire conversation history
+        };
+
+        try {
+            const response = await fetch(GEMINI_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("API Error Response:", errorData);
+                throw new Error(`API request failed with status ${response.status}: ${errorData.error.message || 'Unknown error'}`);
+            }
+
+            const data = await response.json();
+            if (data.candidates && data.candidates.length > 0 && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts.length > 0) {
+                return data.candidates[0].content.parts[0].text;
+            } else {
+                console.warn("Unexpected AI response structure:", data);
+                return "I'm not sure how to respond to that. Can you please rephrase?";
+            }
+        } catch (error) {
+            console.error('Network or parsing error during AI call:', error);
+            throw error; // Re-throw to be caught by sendMessage
+        }
+    }
+
+    function scrollToBottom() {
+        if (chatMessages) { // Add null check
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    }
+
+    // Chatbot Dragging Functionality (from your current script)
+    function initChatbotDrag() {
+        const chatWindow = document.getElementById('chat-window'); // Use correct ID
+        const chatHeader = document.querySelector('.chat-header'); // Use class for header as it doesn't have an ID
+        
+        if (!chatWindow || !chatHeader) {
+            console.warn("Chatbot elements for dragging not found. Dragging disabled.");
+            return;
+        }
+
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        chatHeader.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            const rect = chatWindow.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+            chatWindow.style.cursor = 'grabbing';
+            // Set position to absolute to allow dragging freely
+            chatWindow.style.position = 'absolute';
+            // Clear fixed positioning to avoid conflicts
+            chatWindow.style.right = 'auto';
+            chatWindow.style.bottom = 'auto';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            chatWindow.style.left = `${e.clientX - offsetX}px`;
+            chatWindow.style.top = `${e.clientY - offsetY}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            chatWindow.style.cursor = 'grab';
+        });
+    }
   </script>
 </body>
 
