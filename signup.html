@@ -2,12 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fair Hire AI - Sign Up</title>
-
-  <!-- Styles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FairHire AI - Sign Up</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header>
@@ -23,33 +20,34 @@
   </header>
 
   <section class="content">
-    <h2>Create an Account</h2>
+    <h2 style="text-align: center;">Sign Up</h2>
     <form class="form" id="signupForm">
       <label for="name">Name:</label>
-      <input type="text" id="name" placeholder="Enter your name" required />
-
-      <label for="username">Username:</label>
-      <input type="text" id="username" placeholder="Choose a username" required />
+      <input type="text" id="name" required placeholder="Enter your name" />
+      <label for="Surname">Surname:</label>
+      <input type="text" id="Surname" required placeholder="Enter your surname" />
 
       <label for="email">Email:</label>
-      <input type="email" id="email" placeholder="Enter your email" required />
+      <input type="email" id="email" required placeholder="Enter your email" />
+
 
       <label for="password">Password:</label>
-      <input type="password" id="password" placeholder="Create a password" required />
+      <input type="password" id="password" required placeholder="Create a password" />
 
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" placeholder="Repeat password" required />
+      <label for="userType">User Type:</label>
+      <select id="userType" required>
+        <option value="" disabled selected>Select a role</option>
+        <option value="candidate">Candidate</option>
+        <option value="recruiter">Recruiter</option>
+      </select>
 
       <button type="submit" class="btn">Sign Up</button>
-
       <p style="margin-top: 15px; text-align: center;">
-        Already have an account?
-        <a href="signin.html" style="color: #2980b9; text-decoration: underline;">Sign In</a>
+        Already have an account? <a href="signin.html" style="color: #2980b9;">Sign In</a>
       </p>
     </form>
   </section>
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
@@ -60,36 +58,24 @@
       projectId: "fairhireai-1801f",
       appId: "1:834486048706:web:8b7c847466d5ee43f4e85b",
     };
-
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
     document.getElementById("signupForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-
-      const email = document.getElementById("email").value.trim();
+      const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-
-      if (password !== confirmPassword) {
-        alert("❌ Passwords do not match.");
-        return;
-      }
+      const userType = document.getElementById("userType").value;
 
       try {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         await userCredential.user.sendEmailVerification();
-        alert("🎉 Registered successfully. Check your email for verification.");
+        alert("Registered successfully. Check your email for verification.");
         window.location.href = "signin.html";
       } catch (error) {
-        console.error(error);
         alert("Signup failed: " + error.message);
       }
     });
   </script>
-
-  <footer>
-    <p>&copy; 2025 Fair Hire AI. All rights reserved.</p>
-  </footer>
 </body>
 </html>

@@ -1256,12 +1256,16 @@
 <body>
 
   <header>
-    <div class="content">
-      <h1>FairHire AI</h1>
-      <p class="subtitle">Smart Recruitment with Built-in Bias Mitigation</p>
-      <p class="tagline">Transforming hiring through AI-powered fairness and efficiency</p>
-    </div>
-  </header>
+  <div class="content" style="text-align: center; padding: 2rem;">
+    <h1>FairHire AI</h1>
+    <p class="subtitle">Smart Recruitment with Built-in Bias Mitigation</p>
+    <p class="tagline">Transforming hiring through AI-powered fairness and efficiency</p>
+
+    <!-- Get Started Button -->
+    <a href="signup.html" class="btn get-started">Get Started</a>
+  </div>
+</header>
+
 
   <nav id="main-nav">
     <ul>
@@ -1274,38 +1278,37 @@
   </nav>
 
   <section class="hero" id="hero-section">
-    <div class="content">
-      <h2>Find the right talent. Fast and Fair.</h2>
-      <p>Revolutionary recruitment platform powered by AI and automation, designed to eliminate bias and promote
-        diversity in hiring.</p>
+  <div class="content">
+    <h2>Find the right talent. Fast and Fair.</h2>
+    <p>
+      Revolutionary recruitment platform powered by AI and automation, designed to eliminate bias and promote
+      diversity in hiring.
+    </p>
 
-      <div class="stats">
-        <div class="stat">
-          <span class="stat-number">80%</span>
-          <span class="stat-label">Faster Hiring</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">70%</span>
-          <span class="stat-label">Bias Reduction</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">94%</span>
-          <span class="stat-label">Match Accuracy</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number">60%</span>
-          <span class="stat-label">Cost Savings</span>
-        </div>
+    <!-- Horizontal Stats Box -->
+    <div class="stats-box">
+      <div class="stat">
+        <span class="stat-number">80%</span>
+        <span class="stat-label">Faster Hiring</span>
       </div>
-
-      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-        <a href="#" class="btn" onclick="showUserTypeSelection()">
-          <i class="fas fa-rocket"></i>
-          Get Started Today
-        </a>
+      <div class="stat">
+        <span class="stat-number">70%</span>
+        <span class="stat-label">Bias Reduction</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">94%</span>
+        <span class="stat-label">Match Accuracy</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">60%</span>
+        <span class="stat-label">Cost Savings</span>
       </div>
     </div>
-  </section>
+
+    
+  </div>
+</section>
+
 
   <section class="user-type-selection" id="user-selection">
     <h2>Choose Your Path</h2>
@@ -1335,6 +1338,7 @@
   </section>
 
   <section class="application-form" id="application-form">
+    
     <h2>Submit Your Application</h2>
     <div class="form-container">
       <form class="form-grid" onsubmit="submitApplication(event)">
@@ -1396,6 +1400,11 @@
           <textarea id="motivation" name="motivation" rows="4"
             placeholder="Tell us what motivates you and why you're the perfect fit..."></textarea>
         </div>
+        <!-- ✅ CV Upload Field -->
+<div class="form-group full-width">
+  <label for="cv">Upload Your CV (PDF or Word) *</label>
+  <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+</div>
         <div class="form-group full-width">
           <div class="form-actions">
             <button type="submit" class="cta-button">
@@ -1661,10 +1670,7 @@
   <footer>
     <div class="footer-content">
       <div class="footer-brand">FairHire AI</div>
-      <div class="footer-description">
-        Revolutionizing recruitment through artificial intelligence and bias mitigation. Building fairer, more diverse
-        workplaces for the future.
-      </div>
+     
       <div class="footer-links">
         <a href="#about" id="nav-about">About Us</a>
         <a href="#features" id="nav-features">Features</a>

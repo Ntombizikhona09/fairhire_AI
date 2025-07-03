@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fair Hire AI - Sign In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FairHire AI - Sign In</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
+
 <body>
   <header>
     <h1>Fair Hire AI</h1>
@@ -20,33 +23,41 @@
   </header>
 
   <section class="content">
-    <h2>Sign In</h2>
+    <h2 style="text-align: center;">Sign In</h2>
     <form class="form" id="loginForm">
       <label for="email">Email:</label>
-      <input type="email" id="email" required />
+      <input type="email" id="email" required placeholder="Enter your email" />
 
       <label for="password">Password:</label>
-      <input type="password" id="password" required />
+      <input type="password" id="password" required placeholder="Enter your password" />
+
+      <label for="userType">User Type:</label>
+      <select id="userType" required>
+        <option value="" disabled selected>Select role</option>
+        <option value="candidate">Candidate</option>
+        <option value="recruiter">Recruiter</option>
+      </select>
 
       <button type="submit" class="btn">Sign In</button>
 
-      <p style="margin-top: 15px;">
+      <p style="text-align: center; margin-top: 15px;">
         Don't have an account?
         <a href="signup.html" style="color: #2980b9;">Sign Up</a>
       </p>
     </form>
   </section>
 
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js"></script>
 
   <script>
     const firebaseConfig = {
-     apiKey: "AIzaSyD4ZsRT-YrTYQHC6_GLmcp88HevsuQTK8w",
-        authDomain: "fairhireai-1801f.firebaseapp.com",
-        projectId: "fairhireai-1801f",
-       appId: "1:834486048706:web:8b7c847466d5ee43f4e85b",
+      apiKey: "AIzaSyD4ZsRT-YrTYQHC6_GLmcp88HevsuQTK8w",
+      authDomain: "fairhireai-1801f.firebaseapp.com",
+      projectId: "fairhireai-1801f",
+      appId: "1:834486048706:web:8b7c847466d5ee43f4e85b",
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -58,6 +69,7 @@
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+      const selectedUserType = document.getElementById("userType").value;
 
       try {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
@@ -69,21 +81,25 @@
           return;
         }
 
-        // Fetch userType from Firestore
         const userDoc = await db.collection("users").doc(user.uid).get();
-
         if (userDoc.exists) {
-          const userType = userDoc.data().userType;
+          const storedUserType = userDoc.data().userType;
 
-          if (userType === "candidate") {
+          if (storedUserType !== selectedUserType) {
+            alert(`❌ Incorrect role selected. You are registered as a ${storedUserType}.`);
+            await auth.signOut();
+            return;
+          }
+
+          if (storedUserType === "candidate") {
             window.location.href = "apply.html";
-          } else if (userType === "recruiter") {
+          } else if (storedUserType === "recruiter") {
             window.location.href = "dashboard.html";
           } else {
-            alert("User role is missing. Please contact support.");
+            alert("User role is invalid or missing.");
           }
         } else {
-          alert("User data not found. Please contact support.");
+          alert("User data not found.");
         }
       } catch (error) {
         alert("Login failed: " + error.message);

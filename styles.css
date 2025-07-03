@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  background-color: #2c3e50;
+  background-color: #2980b9;
   color: white;
   padding: 20px 40px;
   display: flex;
@@ -36,22 +36,114 @@ nav a {
   text-decoration: none;
 }
 
+/* Hero Section Styling */
 .hero {
-  background-color: #2980b9;
-  color: white;
-  text-align: center;
   padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
 }
 
-.hero .btn {
-  background-color: white;
-  color: #2980b9;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-top: 20px;
-  display: inline-block;
+.hero .content {
+  max-width: 900px;
+  margin: 0 auto;
 }
+
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.stats-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--bg-primary); /* white */
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  max-width: 900px;
+  margin: 0 auto 40px;
+  gap: 40px;
+  flex-wrap: nowrap; /* keep all items in one row */
+}
+
+.stat {
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+
+/* Responsive Button */
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #004fa3;
+}
+.intro-horizontal-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  flex-wrap: nowrap;
+}
+
+.intro-horizontal-box h2 {
+  flex: 1;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.intro-horizontal-box p {
+  flex: 1;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+
+
 
 .features {
   display: flex;
