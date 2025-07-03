@@ -1,51 +1,386 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FairHire AI - Sign In</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Capaciti Recruitment - Sign In</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary-color: #3b82f6;
+      --accent-color: #06b6d4;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --danger-color: #ef4444;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-weight: 400;
+      min-height: 100vh;
+    }
+
+    /* Enhanced Header */
+    header {
+      background: url('images/HRbanner.png') center/cover;
+      color: white;
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Add blur overlay to banner */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('images/HRbanner.png') center/cover;
+      filter: blur(3px);
+      z-index: 1;
+    }
+
+    /* Dark overlay for better text contrast */
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+
+    /* Logo styling in header */
+    .header-logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      position: relative;
+      z-index: 3;
+    }
+
+    header .content {
+      position: relative;
+      z-index: 3;
+    }
+
+    header h1 {
+      margin: 0 0 15px 0;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    header .subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: 0.95;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Enhanced Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+      background: rgba(37, 99, 235, 0.1);
+      transform: translateY(-1px);
+    }
+
+    nav a.active {
+      color: var(--primary-color);
+      background: rgba(37, 99, 235, 0.15);
+    }
+
+    /* Main content area */
+    .main-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 160px);
+      padding: 40px 20px;
+    }
+
+    /* Enhanced Login Form */
+    .form-container {
+      max-width: 450px;
+      width: 100%;
+      background: var(--bg-primary);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border-color);
+    }
+
+    .form-container h2 {
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: var(--bg-primary);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--shadow-md);
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .form-links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .form-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Loading States */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Notification Styles */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow-xl);
+      z-index: 10000;
+      transform: translateX(400px);
+      transition: all 0.3s ease;
+      max-width: 300px;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      border-left: 4px solid var(--success-color);
+    }
+
+    .notification.error {
+      border-left: 4px solid var(--danger-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav ul {
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .form-container {
+        padding: 30px;
+        margin: 20px;
+      }
+
+      header {
+        padding: 60px 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <header>
-    <h1>Fair Hire AI</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="apply.html">Apply</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-      </ul>
-    </nav>
+    <div class="content">
+      <img src="images/CAPACITI-lOGO-V3-1020x550.jpg" alt="Capaciti Logo" class="header-logo">
+      <h1>Capaciti Recruitment</h1>
+      <p class="subtitle">Smart Recruitment with Built-in Bias Mitigation</p>
+    </div>
   </header>
 
-  <section class="content">
-    <h2 style="text-align: center;">Sign In</h2>
-    <form class="form" id="loginForm">
-      <label for="email">Email:</label>
-      <input type="email" id="email" required placeholder="Enter your email" />
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#apply">Apply Now</a></li>
+      <li><a href="index.html#dashboard">Dashboard</a></li>
+      <li><a href="signin.html" class="active">Sign In</a></li>
+    </ul>
+  </nav>
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" required placeholder="Enter your password" />
+  <div class="main-content">
+    <div class="form-container">
+      <h2>Sign In</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="Enter your email address">
+        </div>
 
-      <label for="userType">User Type:</label>
-      <select id="userType" required>
-        <option value="" disabled selected>Select role</option>
-        <option value="candidate">Candidate</option>
-        <option value="recruiter">Recruiter</option>
-      </select>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
 
-      <button type="submit" class="btn">Sign In</button>
+        <div class="form-group">
+          <label for="userType">User Type</label>
+          <select id="userType" name="userType" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="candidate">Job Candidate</option>
+            <option value="recruiter">Recruiter/HR Professional</option>
+          </select>
+        </div>
 
-      <p style="text-align: center; margin-top: 15px;">
-        Don't have an account?
-        <a href="signup.html" style="color: #2980b9;">Sign Up</a>
-      </p>
-    </form>
-  </section>
+        <button type="submit" class="btn">
+          <i class="fas fa-sign-in-alt"></i>
+          Sign In
+        </button>
+
+        <div class="form-links">
+          <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
@@ -53,10 +388,35 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js"></script>
 
   <script>
+    // Notification function
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}" style="color: var(--${type === 'success' ? 'success' : 'danger'}-color);"></i>
+          <span>${message}</span>
+        </div>
+      `;
+
+      document.body.appendChild(notification);
+
+      setTimeout(() => notification.classList.add('show'), 100);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          if (notification.parentNode) {
+            document.body.removeChild(notification);
+          }
+        }, 300);
+      }, 4000);
+    }
+
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyD4ZsRT-YrTYQHC6_GLmcp88HevsuQTK8w",
-      authDomain: "fairhireai-1801f.firebaseapp.com",
-      projectId: "fairhireai-1801f",
+      authDomain: "capaciti-recruitment.firebaseapp.com",
+      projectId: "capaciti-recruitment",
       appId: "1:834486048706:web:8b7c847466d5ee43f4e85b",
     };
 
@@ -64,8 +424,16 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
+    // Login form handler
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalHTML = submitBtn.innerHTML;
+
+      // Show loading state
+      submitBtn.innerHTML = '<div class="loading"></div> Signing In...';
+      submitBtn.disabled = true;
 
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
@@ -76,7 +444,7 @@
         const user = userCredential.user;
 
         if (!user.emailVerified) {
-          alert("Please verify your email before signing in.");
+          showNotification("Please verify your email before signing in.", "error");
           await auth.signOut();
           return;
         }
@@ -86,25 +454,92 @@
           const storedUserType = userDoc.data().userType;
 
           if (storedUserType !== selectedUserType) {
-            alert(`❌ Incorrect role selected. You are registered as a ${storedUserType}.`);
+            showNotification(`Incorrect role selected. You are registered as a ${storedUserType}.`, "error");
             await auth.signOut();
             return;
           }
 
-          if (storedUserType === "candidate") {
-            window.location.href = "apply.html";
-          } else if (storedUserType === "recruiter") {
-            window.location.href = "dashboard.html";
-          } else {
-            alert("User role is invalid or missing.");
-          }
+          showNotification("Login successful! Redirecting...", "success");
+
+          setTimeout(() => {
+            if (storedUserType === "candidate") {
+              window.location.href = "index.html#apply";
+            } else if (storedUserType === "recruiter") {
+              window.location.href = "index.html#dashboard";
+            }
+          }, 1500);
         } else {
-          alert("User data not found.");
+          showNotification("User data not found.", "error");
         }
       } catch (error) {
-        alert("Login failed: " + error.message);
+        console.error("Login error:", error);
+        let errorMessage = "Login failed. Please try again.";
+        
+        if (error.code === 'auth/user-not-found') {
+          errorMessage = "No account found with this email address.";
+        } else if (error.code === 'auth/wrong-password') {
+          errorMessage = "Incorrect password. Please try again.";
+        } else if (error.code === 'auth/invalid-email') {
+          errorMessage = "Please enter a valid email address.";
+        } else if (error.code === 'auth/too-many-requests') {
+          errorMessage = "Too many failed attempts. Please try again later.";
+        }
+        
+        showNotification(errorMessage, "error");
+      } finally {
+        // Reset button state
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
       }
     });
+
+    // Form validation
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach(input => {
+      input.addEventListener('blur', validateField);
+      input.addEventListener('input', clearValidationError);
+    });
+
+    function validateField(event) {
+      const field = event.target;
+      const value = field.value.trim();
+
+      if (field.hasAttribute('required') && !value) {
+        showFieldError(field, 'This field is required');
+      } else if (field.type === 'email' && value && !isValidEmail(value)) {
+        showFieldError(field, 'Please enter a valid email address');
+      } else {
+        clearFieldError(field);
+      }
+    }
+
+    function showFieldError(field, message) {
+      clearFieldError(field);
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'field-error';
+      errorDiv.style.color = 'var(--danger-color)';
+      errorDiv.style.fontSize = '0.875rem';
+      errorDiv.style.marginTop = '4px';
+      errorDiv.textContent = message;
+      field.parentNode.appendChild(errorDiv);
+      field.style.borderColor = 'var(--danger-color)';
+    }
+
+    function clearFieldError(field) {
+      const existingError = field.parentNode.querySelector('.field-error');
+      if (existingError) {
+        existingError.remove();
+      }
+      field.style.borderColor = '';
+    }
+
+    function clearValidationError(event) {
+      clearFieldError(event.target);
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
   </script>
 </body>
 </html>

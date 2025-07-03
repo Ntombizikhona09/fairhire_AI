@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <title>FairHire AI - Smart Recruitment System</title>
+  <title>Capaciti Recruitment - Smart Recruitment System</title>
   <style>
     :root {
       --primary-color: #2563eb;
@@ -46,7 +47,7 @@
 
     /* Enhanced Header */
     header {
-      background: url('https://images.pexels.com/photos/5989926/pexels-photo-5989926.jpeg') center/cover;
+      background: url('images/HRbanner.png') center/cover;
       color: white;
       padding: 120px 40px;
       text-align: center;
@@ -54,11 +55,74 @@
       overflow: hidden;
     }
 
-    /* Removed header::before to eliminate overlay */
+    /* Add blur overlay to banner */
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('images/HRbanner.png') center/cover;
+      filter: blur(3px);
+      z-index: 1;
+    }
+
+    /* Dark overlay for better text contrast */
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+
+    /* Slideshow Section */
+    .slideshow-section {
+      height: 400px;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slideshow-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .slideshow-image.active {
+      opacity: 1;
+    }
+
+    /* Logo styling in header */
+    .header-logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      position: relative;
+      z-index: 3;
+    }
 
     header .content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     header h1 {
@@ -412,7 +476,6 @@
       padding: 100px 40px;
       background: var(--bg-tertiary);
       display: none;
-      /* Hidden by default now part of info-page-container logic */
     }
 
     .features-container {
@@ -737,6 +800,69 @@
       margin-bottom: 0;
     }
 
+    .stats-box {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: var(--bg-primary);
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      max-width: 900px;
+      margin: 0 auto 40px;
+      gap: 40px;
+      flex-wrap: nowrap;
+    }
+
+    .stat {
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .intro-horizontal-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      flex-wrap: nowrap;
+    }
+
+    .intro-horizontal-box h2 {
+      flex: 1;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin: 0;
+    }
+
+    .intro-horizontal-box p {
+      flex: 1;
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
     /* Enhanced Footer */
     footer {
       background: linear-gradient(135deg, var(--text-primary) 0%, #374151 100%);
@@ -912,358 +1038,298 @@
       border-left: 4px solid var(--danger-color);
     }
 
-    /* --- CHATBOT STYLING --- */
+    /* CHATBOT STYLING */
+    .chat-toggle-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 20px;
+        font-size: 1.1em;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 1000;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
 
-  /* Main Chat Toggle Button */
-  .chat-toggle-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 15px 20px;
-      font-size: 1.1em;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 1000;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-  }
+    .chat-toggle-button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+    }
 
-  .chat-toggle-button:hover {
-      background-color: var(--dark-primary-color);
-      transform: translateY(-2px);
-  }
+    .chat-toggle-button i {
+        font-size: 1.3em;
+    }
 
-  .chat-toggle-button i {
-      font-size: 1.3em;
-  }
+    #chat-window {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 350px;
+        height: 500px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 999;
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        transform-origin: bottom right;
+    }
 
-  /* Chat Window Container */
-  #chat-window {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 350px;
-      height: 500px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 999;
-      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-      transform-origin: bottom right;
-  }
+    #chat-window.hidden {
+        transform: scale(0.7) translate(50%, 50%);
+        opacity: 0;
+        pointer-events: none;
+    }
 
-  /* Hidden state for the chat window */
-  #chat-window.hidden {
-      transform: scale(0.7) translate(50%, 50%);
-      opacity: 0;
-      pointer-events: none;
-  }
+    .chat-header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1em;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        cursor: grab;
+    }
 
-  /* Chat Header (for dragging) */
-  .chat-header {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.1em;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      cursor: grab;
-  }
+    .chat-header h3 {
+        margin: 0;
+        font-weight: 500;
+    }
 
-  .chat-header h3 {
-      margin: 0;
-      font-weight: 500;
-  }
+    #close-chat {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2em;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
+    }
 
-  /* Close Chat Button inside header */
-  #close-chat {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.2em;
-      cursor: pointer;
-      padding: 5px;
-      border-radius: 5px;
-      transition: background-color 0.2s ease;
-  }
+    #close-chat:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
 
-  #close-chat:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-  }
+    #chat-messages {
+        flex-grow: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background-color: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        scroll-behavior: smooth;
+    }
 
-  /* Chat Messages Area */
-  #chat-messages {
-      flex-grow: 1;
-      padding: 15px;
-      overflow-y: auto;
-      background-color: #f9f9f9;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      scroll-behavior: smooth;
-  }
+    .message {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        max-width: 85%;
+    }
 
-  /* Individual Message Styles */
-  .message {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 10px;
-      max-width: 85%;
-  }
+    .message-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-top: 5px;
+    }
 
-  .message-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-top: 5px;
-  }
+    .user-message {
+        justify-content: flex-end;
+        margin-left: auto;
+    }
 
-  .user-message {
-      justify-content: flex-end;
-      margin-left: auto;
-  }
+    .user-message .message-avatar {
+        order: 2;
+        margin-right: 0;
+        margin-left: 8px;
+    }
 
-  .user-message .message-avatar {
-      order: 2;
-      margin-right: 0;
-      margin-left: 8px;
-  }
+    .bot-message {
+        justify-content: flex-start;
+        margin-right: auto;
+    }
 
-  .bot-message {
-      justify-content: flex-start;
-      margin-right: auto;
-  }
+    .bot-message .message-avatar {
+        order: 1;
+        margin-right: 8px;
+        margin-left: 0;
+    }
 
-  .bot-message .message-avatar {
-      order: 1;
-      margin-right: 8px;
-      margin-left: 0;
-  }
+    .message-content {
+        padding: 10px 15px;
+        border-radius: 20px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        font-size: 0.95em;
+        line-height: 1.4;
+    }
 
-  .message-content {
-      padding: 10px 15px;
-      border-radius: 20px;
-      word-wrap: break-word;
-      white-space: pre-wrap;
-      font-size: 0.95em;
-      line-height: 1.4;
-  }
+    .user-message .message-content {
+        background-color: var(--primary-color);
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
 
-  .user-message .message-content {
-      background-color: var(--primary-color);
-      color: white;
-      border-bottom-right-radius: 5px;
-  }
+    .bot-message .message-content {
+        background-color: #e0e0e0;
+        color: #333;
+        border-bottom-left-radius: 5px;
+    }
 
-  .bot-message .message-content {
-      background-color: #e0e0e0;
-      color: #333;
-      border-bottom-left-radius: 5px;
-  }
+    .message-content p:first-child {
+        margin-top: 0;
+    }
+    .message-content p:last-child {
+        margin-bottom: 0;
+    }
+    .message-content a {
+        color: var(--primary-color);
+        text-decoration: underline;
+    }
+    .message-content ul, .message-content ol {
+        padding-left: 20px;
+        margin-bottom: 0;
+    }
+    .message-content li {
+        margin-bottom: 5px;
+    }
+    .message-content strong {
+        font-weight: bold;
+    }
 
-  /* Markdown styling within messages */
-  .message-content p:first-child {
-      margin-top: 0;
-  }
-  .message-content p:last-child {
-      margin-bottom: 0;
-  }
-  .message-content a {
-      color: var(--primary-color);
-      text-decoration: underline;
-  }
-  .message-content ul, .message-content ol {
-      padding-left: 20px;
-      margin-bottom: 0;
-  }
-  .message-content li {
-      margin-bottom: 5px;
-  }
-  .message-content strong {
-      font-weight: bold;
-  }
+    .typing-indicator .message-content {
+        font-style: italic;
+        color: #777;
+        background-color: #e0e0e0;
+        animation: pulse 1.5s infinite ease-in-out;
+    }
 
-  /* Typing Indicator */
-  .typing-indicator .message-content {
-      font-style: italic;
-      color: #777;
-      background-color: #e0e0e0;
-      animation: pulse 1.5s infinite ease-in-out;
-  }
+    @keyframes pulse {
+        0% { opacity: 0.5; }
+        50% { opacity: 1; }
+        100% { opacity: 0.5; }
+    }
 
-  @keyframes pulse {
-      0% { opacity: 0.5; }
-      50% { opacity: 1; }
-      100% { opacity: 0.5; }
-  }
+    .chat-input-area {
+        display: flex;
+        padding: 15px;
+        border-top: 1px solid #eee;
+        background-color: white;
+    }
 
-  /* Chat Input Area */
-  .chat-input-area {
-      display: flex;
-      padding: 15px;
-      border-top: 1px solid #eee;
-      background-color: white;
-  }
+    #user-input {
+        flex-grow: 1;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        font-size: 1em;
+        margin-right: 10px;
+        transition: border-color 0.3s ease;
+    }
 
-  #user-input {
-      flex-grow: 1;
-      padding: 10px 15px;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      font-size: 1em;
-      margin-right: 10px;
-      transition: border-color 0.3s ease;
-  }
+    #user-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
 
-  #user-input:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 66, 133, 244), 0.2);
-  }
+    #send-button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 18px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-  #send-button {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 10px 18px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-  }
+    #send-button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-1px);
+    }
 
-  #send-button:hover {
-      background-color: var(--dark-primary-color);
-      transform: translateY(-1px);
-  }
+    #send-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
 
-  #send-button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-  }
+    #new-chat-button {
+        background-color: #f1f1f1;
+        color: #555;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 0.9em;
+        cursor: pointer;
+        margin: 10px 15px 15px 15px;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        text-align: center;
+    }
 
-  /* New Chat Button */
-  #new-chat-button {
-      background-color: #f1f1f1;
-      color: #555;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 10px 15px;
-      font-size: 0.9em;
-      cursor: pointer;
-      margin: 10px 15px 15px 15px;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-      text-align: center;
-  }
+    #new-chat-button:hover {
+        background-color: #e0e0e0;
+        border-color: #ccc;
+    }
 
-  #new-chat-button:hover {
-      background-color: #e0e0e0;
-      border-color: #ccc;
-  }
+    .quick-replies-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        padding-top: 5px;
+        border-top: 1px dashed #eee;
+        justify-content: center;
+    }
 
-  /* Quick Replies */
-  .quick-replies-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-      padding-top: 5px;
-      border-top: 1px dashed #eee;
-      justify-content: center;
-  }
+    .quick-reply-button {
+        background-color: #e0f2f7;
+        color: #007bff;
+        border: 1px solid #b3e5fc;
+        border-radius: 20px;
+        padding: 8px 12px;
+        font-size: 0.85em;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        white-space: nowrap;
+    }
 
-  .quick-reply-button {
-      background-color: #e0f2f7;
-      color: #007bff;
-      border: 1px solid #b3e5fc;
-      border-radius: 20px;
-      padding: 8px 12px;
-      font-size: 0.85em;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-      white-space: nowrap;
-  }
-
-  .quick-reply-button:hover {
-      background-color: #cce9f5;
-      transform: translateY(-1px);
-  }
-
-  /* Basic Notification Styling (if you use showNotification) */
-  .notification {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #f0f0f0;
-      padding: 15px 25px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      font-size: 1em;
-      color: #333;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s;
-      z-index: 1001;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-  }
-
-  .notification.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-  }
-
-  .notification.success {
-      background-color: #e6ffe6;
-      border: 1px solid #4CAF50;
-      color: #333;
-  }
-
-  .notification.error {
-      background-color: #ffe6e6;
-      border: 1px solid #f44336;
-      color: #333;
-  }
-
-  /* Optional: Define some primary colors if not already in your CSS */
-  :root {
-      --primary-color: #007bff;
-      --dark-primary-color: #0056b3;
-      --primary-color-rgb: 0, 123, 255;
-      --success-color: #28a745;
-      --danger-color: #dc3545;
-  }
+    .quick-reply-button:hover {
+        background-color: #cce9f5;
+        transform: translateY(-1px);
+    }
   </style>
 </head>
 
 <body>
 
   <header>
-  <div class="content" style="text-align: center; padding: 2rem;">
-    <h1>FairHire AI</h1>
-    <p class="subtitle">Smart Recruitment with Built-in Bias Mitigation</p>
-    <p class="tagline">Transforming hiring through AI-powered fairness and efficiency</p>
+    <div class="content" style="text-align: center; padding: 2rem;">
+      <img src="images/CapaLogo.jfif" alt="Capaciti Logo" class="header-logo">
+      <h1>Capaciti Recruitment</h1>
+      <p class="subtitle">Smart Recruitment with Built-in Bias Mitigation</p>
+      <p class="tagline">Transforming hiring through AI-powered fairness and efficiency</p>
 
-    <!-- Get Started Button -->
-    <a href="signup.html" class="btn get-started">Get Started</a>
-  </div>
-</header>
+      <!-- Get Started Button -->
+      <a href="signup.html" class="btn get-started">Get Started</a>
+    </div>
+  </header>
 
 
   <nav id="main-nav">
@@ -1304,7 +1370,7 @@
       </div>
     </div>
 
-    
+
   </div>
 </section>
 
@@ -1337,7 +1403,7 @@
   </section>
 
   <section class="application-form" id="application-form">
-    
+
     <h2>Submit Your Application</h2>
     <div class="form-container">
       <form class="form-grid" onsubmit="submitApplication(event)">
@@ -1399,11 +1465,10 @@
           <textarea id="motivation" name="motivation" rows="4"
             placeholder="Tell us what motivates you and why you're the perfect fit..."></textarea>
         </div>
-        <!-- ✅ CV Upload Field -->
-<div class="form-group full-width">
-  <label for="cv">Upload Your CV (PDF or Word) *</label>
-  <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
-</div>
+        <div class="form-group full-width">
+          <label for="cv">Upload Your CV (PDF or Word) *</label>
+          <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+        </div>
         <div class="form-group full-width">
           <div class="form-actions">
             <button type="submit" class="cta-button">
@@ -1426,7 +1491,7 @@
       <div class="demo-info">
         <p><strong>Demo Credentials</strong></p>
         <p>Username: <code>admin</code></p>
-        <p>Password: <code>fairhire2025</code></p>
+        <p>Password: <code>capaciti2025</code></p>
       </div>
       <form onsubmit="handleLogin(event)">
         <input type="text" id="username" placeholder="Username" required>
@@ -1540,11 +1605,13 @@
 
   <section id="about" class="info-page">
     <div class="info-page-container">
-      <h2>About Us</h2>
-      <p>FairHire AI aims to enhance the recruitment process through innovative AI technologies that minimize biases and
-        promote a diverse workforce. Our team is dedicated to creating a fair hiring system that supports candidates
-        from
-        all backgrounds.</p>
+      <h2>About Capaciti</h2>
+      <p>More than 2 decades ago, an impact organisation was born at the tip of Africa in Cape Town. The Cape IT Initiative and the Bandwidth Barn was established in 1999, by a group of civic activists with a vision to build a future-fit, inclusive society through technology and innovation.</p>
+      
+      <p>The organisation evolved into the Cape Innovation & Technology Initiative (CiTi) in 2015 and the Bandwidth Barn, known as the oldest tech incubator in Africa, expanded to the informal economy and the township of Khayelitsha to provide dedicated support to entrepreneurs that have been excluded from participating in the digital economy.</p>
+      
+      <p>Our recruitment platform builds on this legacy of inclusion and innovation, using AI technologies to minimize biases and promote a diverse workforce while supporting candidates from all backgrounds.</p>
+      
       <div style="text-align: center; margin-top: 30px;">
         <button type="button" class="btn secondary" onclick="goBackToHome()">
           <i class="fas fa-home"></i>
@@ -1627,7 +1694,7 @@
   <section id="contact" class="info-page">
     <div class="info-page-container">
       <h2>Contact Us</h2>
-      <p>For inquiries or support, please reach out to us at <a href="mailto:team@fairhire.ai">team@fairhire.ai</a>.</p>
+      <p>For inquiries or support, please reach out to us at <a href="mailto:recruitment@capaciti.org">recruitment@capaciti.org</a>.</p>
       <div style="text-align: center; margin-top: 30px;">
         <button type="button" class="btn secondary" onclick="goBackToHome()">
           <i class="fas fa-home"></i>
@@ -1654,9 +1721,8 @@
   <section id="terms" class="info-page">
     <div class="info-page-container">
       <h2>Terms of Service</h2>
-      <p>By using FairHire AI, you agree to our terms and conditions. Ensure you read them fully to understand your
-        rights
-        and responsibilities.</p>
+      <p>By using Capaciti Recruitment, you agree to our terms and conditions. Ensure you read them fully to understand your
+        rights and responsibilities.</p>
       <div style="text-align: center; margin-top: 30px;">
         <button type="button" class="btn secondary" onclick="goBackToHome()">
           <i class="fas fa-home"></i>
@@ -1666,10 +1732,26 @@
     </div>
   </section>
 
+  <!-- Image Slideshow Section -->
+  <section class="slideshow-section">
+    <div class="slideshow-container">
+      <img src="images/capac1.jpeg" alt="Capaciti Image 1" class="slideshow-image active">
+      <img src="images/capa2.jpeg" alt="Capaciti Image 2" class="slideshow-image">
+      <img src="images/capa3.jpeg" alt="Capaciti Image 3" class="slideshow-image">
+      <img src="images/capa4.jpeg" alt="Capaciti Image 4" class="slideshow-image">
+      <img src="images/capa5.jpeg" alt="Capaciti Image 5" class="slideshow-image">
+      <img src="images/capa6.jpeg" alt="Capaciti Image 6" class="slideshow-image">
+      <img src="images/capa7.jpeg" alt="Capaciti Image 7" class="slideshow-image">
+    </div>
+  </section>
+
   <footer>
     <div class="footer-content">
-      <div class="footer-brand">FairHire AI</div>
-     
+      <div class="footer-brand">Capaciti Recruitment</div>
+      <div class="footer-description">
+        Building a future-fit, inclusive society through technology and innovation. Transforming recruitment with AI-powered fairness and efficiency.
+      </div>
+
       <div class="footer-links">
         <a href="#about" id="nav-about">About Us</a>
         <a href="#features" id="nav-features">Features</a>
@@ -1680,14 +1762,14 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 FairHire AI - Smart Recruitment System. All rights reserved.</p>
+      <p>&copy; 2025 Capaciti Recruitment - Smart Recruitment System. All rights reserved.</p>
       <p>Built with care by Team Syntax Serpents for CAPACITI Hackathon 2025</p>
     </div>
   </footer>
 
   <div id="about" class="content-section" style="display: none;">
-    <h2>About Us</h2>
-    <p>FairHire AI aims to enhance the recruitment process through innovative AI technologies that minimize biases and
+    <h2>About Capaciti</h2>
+    <p>Capaciti Recruitment aims to enhance the recruitment process through innovative AI technologies that minimize biases and
       promote a diverse workforce. Our team is dedicated to creating a fair hiring system that supports candidates from
       all backgrounds.</p>
   </div>
@@ -1707,15 +1789,15 @@
     <h2>Pricing</h2>
     <p>We offer various subscription plans tailored to meet the needs of businesses:</p>
     <ul>
-      <li>Basic Plan: $99/month</li>
-      <li>Pro Plan: $499/month</li>
+      <li>Basic Plan: R1,799/month</li>
+      <li>Pro Plan: R8,999/month</li>
       <li>Enterprise Solutions: Contact us for a custom quote.</li>
     </ul>
   </div>
 
   <div id="contact" class="content-section" style="display: none;">
     <h2>Contact</h2>
-    <p>For inquiries or support, please reach out to us at <a href="mailto:team@fairhire.ai">team@fairhire.ai</a>.</p>
+    <p>For inquiries or support, please reach out to us at <a href="mailto:recruitment@capaciti.org">recruitment@capaciti.org</a>.</p>
   </div>
 
   <div id="privacy" class="content-section" style="display: none;">
@@ -1726,13 +1808,15 @@
 
   <div id="terms" class="content-section" style="display: none;">
     <h2>Terms of Service</h2>
-    <p>By using FairHire AI, you agree to our terms and conditions. Ensure you read them fully to understand your rights
+    <p>By using Capaciti Recruitment, you agree to our terms and conditions. Ensure you read them fully to understand your rights
       and responsibilities.</p>
   </div>
 
-  <div id="notification-container"></div> <div class="chat-window hidden" id="chat-window">
+  <div id="notification-container"></div> 
+  
+  <div class="chat-window hidden" id="chat-window">
     <div class="chat-header">
-        <h3>FairHire AI Assistant</h3>
+        <h3>Capaciti AI Assistant</h3>
         <button id="close-chat" class="close-button">X</button>
     </div>
     <div class="chat-messages" id="chat-messages">
@@ -1749,18 +1833,13 @@
   </button>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-     // --- IMPORTANT: REPLACE 'YOUR_GEMINI_API_KEY' WITH YOUR ACTUAL API KEY ---
-    const GEMINI_API_KEY = 'AIzaSyBho2m-u0hump6aZxLaJ2QIexrcFafTm0A'; // Your API Key
-    // --------------------------------------------------------------------------
+    const GEMINI_API_KEY = 'AIzaSyBho2m-u0hump6aZxLaJ2QIexrcFafTm0A';
+    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
 
-    // Define the correct API URL with the working model
-    const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`; // FIX: Changed model to gemini-1.5-flash-latest
-
-    // Define initial system message for context (from old working script)
     const initialSystemMessage = {
         role: "user",
         parts: [{ text: `
-            You are an AI-powered virtual assistant for a Smart Recruitment System called "FairHire AI".
+            You are an AI-powered virtual assistant for a Smart Recruitment System called "Capaciti Recruitment".
             Your primary purpose is to assist users (both job seekers and potential recruiters/hiring managers) by providing information directly related to the platform's functionalities.
 
             Focus on the following key areas of the Smart Recruitment System:
@@ -1785,27 +1864,21 @@
             * Keep responses concise, helpful, and directly relevant to the Smart Recruitment System.
             * Maintain a professional and friendly tone.
             * Do NOT mention that you are an AI model unless directly asked.
-            * If a question is outside the scope of the recruitment platform's functionalities (e.g., general career advice, personal data security specifics beyond what the platform publicly states, or unrelated topics like weather), politely state that you can only answer questions related to the Smart Recruitment System.
-            * If asked about a feature that isn't explicitly mentioned above, you can give a general positive answer if it aligns with a smart recruitment system, or state that the specific detail might vary or isn't a core feature currently.
-            * When providing information that could lead to an action (like applying, viewing jobs, or learning more about a specific feature, wanting to learn more about FairHire AI), please include a relevant hyperlink formatted in Markdown. Use placeholder URLs like 'file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#about', 'file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#apply', 'https://fairhireai.com/about-ai-screening', 'file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#login', etc. For example: "To view more info on FairHire AI, please visit our [About Page](file:///C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/index.html#about.)"
-            * You can encourage users to visit specific sections of the website, like "Jobs" or "Apply" or "Features" or "Pricing", if relevant.
+            * If a question is outside the scope of the recruitment platform's functionalities, politely state that you can only answer questions related to the Smart Recruitment System.
+            * When providing information that could lead to an action, include relevant hyperlinks formatted in Markdown.
         `}]
     };
 
     const initialBotGreeting = {
         role: "model",
-        parts: [{ text: "Hi there! I'm the Smart Recruiter Bot. How can I help you today regarding our Smart Recruitment System?" }]
+        parts: [{ text: "Hi there! I'm the Capaciti Smart Recruiter Bot. How can I help you today regarding our Smart Recruitment System?" }]
     };
 
-    // Store conversation history for context (important for chat models)
-    let conversationHistory = []; // Initialized here, will be populated by resetChat()
-
-    // Enhanced global state management
+    let conversationHistory = [];
     let isRecruiterLoggedIn = false;
     let currentSection = 'home';
     let animationQueue = [];
 
-    // Enhanced notification system
     function showNotification(message, type = 'success') {
       const notification = document.createElement('div');
       notification.className = `notification ${type}`;
@@ -1825,7 +1898,6 @@
       }, 4000);
     }
 
-    // Enhanced navigation with smooth transitions
     function showUserTypeSelection() {
       updateActiveSection('user-selection');
       hideAllSections();
@@ -1859,56 +1931,48 @@
       navigateToSection('home');
     }
 
-    // Enhanced application submission with better UX
     function submitApplication(event) {
       event.preventDefault();
 
       const submitBtn = event.target.querySelector('button[type="submit"]');
       const originalHTML = submitBtn.innerHTML;
 
-      // Show loading state
       submitBtn.innerHTML = '<div class="loading"></div> Processing...';
       submitBtn.disabled = true;
 
       const formData = new FormData(event.target);
       const applicationData = Object.fromEntries(formData);
 
-      // Enhanced AI simulation with realistic processing
       setTimeout(() => {
         const skillsCount = applicationData.skills.split(',').length;
         const experienceMultiplier = getExperienceMultiplier(applicationData.experience);
         const educationBonus = getEducationBonus(applicationData.education);
 
-        // More sophisticated scoring algorithm
         const baseScore = Math.floor(Math.random() * 20) + 70;
         const skillsBonus = Math.min(skillsCount * 2, 15);
         const matchScore = Math.min(baseScore + skillsBonus + experienceMultiplier + educationBonus, 98);
         const biasScore = Math.floor(Math.random() * 15) + 85;
         const diversityImpact = Math.floor(Math.random() * 10) + 5;
 
-        // Enhanced feedback message
         const feedback = generateDetailedFeedback(matchScore, applicationData);
 
         showNotification(`Application submitted successfully! Match Score: ${matchScore}% | Bias-Free Score: ${biasScore}%`, 'success');
 
-        // Populate and show the score page
         document.getElementById('match-score-display').textContent = `${matchScore}%`;
         document.getElementById('bias-score-display').textContent = `${biasScore}%`;
         document.getElementById('diversity-impact-display').textContent = `+${diversityImpact}%`;
         document.getElementById('ai-feedback-display').textContent = feedback;
 
-        hideAllSections(); // Hide all other sections
-        document.getElementById('score-page').style.display = 'flex'; // Show the score page
+        hideAllSections();
+        document.getElementById('score-page').style.display = 'flex';
         updateActiveSection('score-page');
 
-        // Reset form and enable button
         submitBtn.innerHTML = originalHTML;
         submitBtn.disabled = false;
         event.target.reset();
       }, 2500);
     }
 
-    // Helper functions for scoring
     function getExperienceMultiplier(experience) {
       const multipliers = {
         '0-1': 2,
@@ -1943,7 +2007,6 @@
       }
     }
 
-    // Enhanced login handling
     function handleLogin(event) {
       event.preventDefault();
 
@@ -1957,7 +2020,7 @@
       const password = document.getElementById('password').value;
 
       setTimeout(() => {
-        if (username === 'admin' && password === 'fairhire2025') {
+        if (username === 'admin' && password === 'capaciti2025') {
           isRecruiterLoggedIn = true;
           showNotification('Login successful! Welcome to the admin dashboard.', 'success');
 
@@ -1977,7 +2040,6 @@
       }, 1500);
     }
 
-    // Enhanced navigation system
     function navigateToSection(targetId) {
       updateActiveSection(targetId);
       hideAllSections();
@@ -1988,7 +2050,6 @@
         case '':
         case 'home':
           heroSection.style.display = 'block';
-          // features section is now an info-page, so it won't be shown by default on home
           updateNavigation('home');
           heroSection.scrollIntoView({behavior: 'smooth'});
           break;
@@ -2042,7 +2103,6 @@
     }
 
     function hideAllSections() {
-      // List all major sections that can be shown/hidden dynamically
       const sections = ['#hero-section', '#user-selection', '#application-form', '#login', '#dashboard', '#insights', '#score-page', '#about', '#features', '#pricing', '#contact', '#privacy', '#terms'];
       sections.forEach(selector => {
         const element = document.querySelector(selector);
@@ -2068,7 +2128,6 @@
       }
     }
 
-    // Enhanced navbar scroll effect
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('main-nav');
       if (window.scrollY > 100) {
@@ -2078,19 +2137,16 @@
       }
     });
 
-    // Enhanced event listeners
     document.addEventListener('DOMContentLoaded', function () {
-      // Navbar click handling
       document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', function (e) {
           e.preventDefault();
           const href = this.getAttribute('href');
-          const targetId = href === '#' ? 'home' : href.substring(1); // Default to 'home'
+          const targetId = href === '#' ? 'home' : href.substring(1);
           navigateToSection(targetId);
         });
       });
 
-      // Footer link click handling
       document.querySelectorAll('footer a').forEach(link => {
         link.addEventListener('click', function (e) {
           e.preventDefault();
@@ -2100,7 +2156,6 @@
         });
       });
 
-      // Form validation enhancements
       const inputs = document.querySelectorAll('input, select, textarea');
       inputs.forEach(input => {
         input.addEventListener('blur', validateField);
@@ -2149,13 +2204,27 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    // Initialize the application
     document.addEventListener('DOMContentLoaded', function () {
       navigateToSection('home');
+      initSlideshow();
     });
 
-    // --- CHATBOT FUNCTIONALITY (REVISED & MERGED) ---
-    // Get chat elements using your HTML IDs
+    // Slideshow functionality
+    function initSlideshow() {
+      const images = document.querySelectorAll('.slideshow-image');
+      let currentIndex = 0;
+
+      function showNextImage() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }
+
+      // Change image every 4 seconds
+      setInterval(showNextImage, 4000);
+    }
+
+    // CHATBOT FUNCTIONALITY
     const chatButton = document.getElementById('chat-button');
     const chatWindow = document.getElementById('chat-window');
     const closeChatButton = document.getElementById('close-chat');
@@ -2164,15 +2233,13 @@
     const sendButton = document.getElementById('send-button');
     const newChatButton = document.getElementById('new-chat-button');
 
-    let typingIndicatorElement = null; // To hold the typing indicator element
+    let typingIndicatorElement = null;
 
-    // Event Listeners for Chatbot (from old working script, adapted for new IDs)
-    // Check if elements exist before adding listeners to prevent errors if HTML is malformed
     if (chatButton) {
         chatButton.addEventListener('click', () => {
             chatWindow.classList.toggle('hidden');
             if (!chatWindow.classList.contains('hidden')) {
-                userInput.focus(); // Focus input when chat opens
+                userInput.focus();
                 scrollToBottom();
                 displayQuickReplies([
                     "How do I apply for a job?",
@@ -2207,28 +2274,26 @@
         newChatButton.addEventListener('click', resetChat);
     }
 
-    // Function to reset the chat (from old working script)
     function resetChat() {
-        if (!chatMessages) { // Add null check
+        if (!chatMessages) {
             console.error("chatMessages element not found. Cannot reset chat.");
             return;
         }
-        chatMessages.innerHTML = ''; // Clear all messages from the display
-        conversationHistory = [initialSystemMessage, initialBotGreeting]; // Reset history to initial state
-        appendMessage("Hi there! I'm the Smart Recruiter Bot. How can I help you today regarding our Smart Recruitment System?", 'bot-message'); // Re-display initial greeting
-        displayQuickReplies([ // Re-display initial quick replies
-            "Tell me about FairHire AI.",
+        chatMessages.innerHTML = '';
+        conversationHistory = [initialSystemMessage, initialBotGreeting];
+        appendMessage("Hi there! I'm the Capaciti Smart Recruiter Bot. How can I help you today regarding our Smart Recruitment System?", 'bot-message');
+        displayQuickReplies([
+            "Tell me about Capaciti Recruitment.",
             "Tell me about AI screening.",
             "How does it ensure fairness?",
             "Benefits for recruiters?"
         ]);
-        if (userInput) { // Add null check
+        if (userInput) {
             userInput.focus();
         }
         scrollToBottom();
     }
 
-    // Main sendMessage function (merged from old working script)
     async function sendMessage() {
         const messageText = userInput.value.trim();
         if (messageText === '') return;
@@ -2236,7 +2301,6 @@
         appendMessage(messageText, 'user-message');
         userInput.value = '';
 
-        // Remove existing quick reply buttons
         const existingQuickReplies = chatMessages.querySelectorAll('.quick-replies-container');
         existingQuickReplies.forEach(container => container.remove());
 
@@ -2245,10 +2309,10 @@
         if (userInput) userInput.disabled = true;
         if (sendButton) sendButton.disabled = true;
 
-        typingIndicatorElement = createTypingIndicator(); // Create and append the indicator
+        typingIndicatorElement = createTypingIndicator();
 
         try {
-            const botResponse = await getAIResponse(conversationHistory); // Renamed from generateBotResponse to match old script
+            const botResponse = await getAIResponse(conversationHistory);
 
             if (typingIndicatorElement && typingIndicatorElement.parentNode) {
                 typingIndicatorElement.remove();
@@ -2262,7 +2326,6 @@
             if (typingIndicatorElement && typingIndicatorElement.parentNode) {
                 typingIndicatorElement.remove();
             }
-            // Use more specific error messages as per the original script's try-catch
             if (error.message.includes('status 400')) {
                 appendMessage("I encountered an error connecting to the AI (400 Bad Request). This usually means there's an issue with the prompt or the request structure. Please try rephrasing your question.", 'bot-message');
             } else if (error.message.includes('status 404')) {
@@ -2281,17 +2344,16 @@
         }
     }
 
-    // Function to create and append the typing indicator (from old working script)
     function createTypingIndicator() {
-        if (!chatMessages) return null; // Null check for chatMessages
+        if (!chatMessages) return null;
 
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', 'bot-message', 'typing-indicator');
 
         const avatarImg = document.createElement('img');
         avatarImg.classList.add('message-avatar');
-        avatarImg.src = 'C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/images/logo.png';
-        avatarImg.alt = 'FairHire AI';
+        avatarImg.src = 'images/CapaLogo.jfif';
+        avatarImg.alt = 'Capaciti';
         messageDiv.prepend(avatarImg);
 
         const textContentDiv = document.createElement('div');
@@ -2304,9 +2366,8 @@
         return messageDiv;
     }
 
-    // UPDATED appendMessage function to handle single string or array of classes (from old working script)
     function appendMessage(text, type) {
-        if (!chatMessages) return; // Null check for chatMessages
+        if (!chatMessages) return;
 
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message');
@@ -2324,17 +2385,16 @@
             avatarImg.src = 'c:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/images/user.png';
             avatarImg.alt = 'You';
         } else if (messageDiv.classList.contains('bot-message')) {
-            avatarImg.src = 'C:/Users/thembisipho.mama/Documents/GitHub/fairhire_AI/images/logo.png';
-            avatarImg.alt = 'FairHire AI';
+            avatarImg.src = 'images/CapaLogo.jfif';
+            avatarImg.alt = 'Capaciti';
         }
         messageDiv.prepend(avatarImg);
 
         const textContentDiv = document.createElement('div');
         textContentDiv.classList.add('message-content');
 
-        // Markdown parsing for bot messages
-        if (typeof marked !== 'undefined' && messageDiv.classList.contains('bot-message')) { // Check if marked is defined
-            textContentDiv.innerHTML = marked.parse(text); // Ensure marked.js is loaded in HTML
+        if (typeof marked !== 'undefined' && messageDiv.classList.contains('bot-message')) {
+            textContentDiv.innerHTML = marked.parse(text);
         } else {
             textContentDiv.innerHTML = text;
         }
@@ -2344,9 +2404,8 @@
         scrollToBottom();
     }
 
-    // Function to display quick reply buttons (from old working script)
     function displayQuickReplies(questions) {
-        if (!chatMessages) return; // Null check for chatMessages
+        if (!chatMessages) return;
 
         const quickRepliesContainer = document.createElement('div');
         quickRepliesContainer.classList.add('quick-replies-container');
@@ -2356,7 +2415,7 @@
             button.classList.add('quick-reply-button');
             button.textContent = question;
             button.addEventListener('click', () => {
-                if (userInput) { // Add null check
+                if (userInput) {
                     userInput.value = question;
                 }
                 sendMessage();
@@ -2367,16 +2426,14 @@
         scrollToBottom();
     }
 
-    // Renamed from getAIResponse to generateBotResponse for consistency with your previous naming,
-    // but the logic inside is from the old working script (uses history)
-    async function getAIResponse(history) { // Takes conversation history
+    async function getAIResponse(history) {
         if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
             console.error("GEMINI_API_KEY is not set or is still the placeholder. Cannot connect to AI.");
             throw new Error(`AI API Key is missing or incorrect.`);
         }
 
         const requestBody = {
-            contents: history // Pass the entire conversation history
+            contents: history
         };
 
         try {
@@ -2403,21 +2460,20 @@
             }
         } catch (error) {
             console.error('Network or parsing error during AI call:', error);
-            throw error; // Re-throw to be caught by sendMessage
+            throw error;
         }
     }
 
     function scrollToBottom() {
-        if (chatMessages) { // Add null check
+        if (chatMessages) {
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
     }
 
-    // Chatbot Dragging Functionality (from your current script)
     function initChatbotDrag() {
-        const chatWindow = document.getElementById('chat-window'); // Use correct ID
-        const chatHeader = document.querySelector('.chat-header'); // Use class for header as it doesn't have an ID
-        
+        const chatWindow = document.getElementById('chat-window');
+        const chatHeader = document.querySelector('.chat-header');
+
         if (!chatWindow || !chatHeader) {
             console.warn("Chatbot elements for dragging not found. Dragging disabled.");
             return;
@@ -2432,9 +2488,7 @@
             offsetX = e.clientX - rect.left;
             offsetY = e.clientY - rect.top;
             chatWindow.style.cursor = 'grabbing';
-            // Set position to absolute to allow dragging freely
             chatWindow.style.position = 'absolute';
-            // Clear fixed positioning to avoid conflicts
             chatWindow.style.right = 'auto';
             chatWindow.style.bottom = 'auto';
         });
@@ -2454,4 +2508,3 @@
 </body>
 
 </html>
-```

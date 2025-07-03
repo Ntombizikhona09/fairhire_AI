@@ -1,3 +1,4 @@
+
 /* Reset */
 * {
   margin: 0;
@@ -10,6 +11,7 @@ body {
   background-color: #f9f9f9;
   color: #333;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
 header {
@@ -63,14 +65,14 @@ nav a {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: var(--bg-primary); /* white */
+  background: white;
   padding: 30px 40px;
   border-radius: 16px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   max-width: 900px;
   margin: 0 auto 40px;
   gap: 40px;
-  flex-wrap: nowrap; /* keep all items in one row */
+  flex-wrap: nowrap;
 }
 
 .stat {
@@ -82,21 +84,20 @@ nav a {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--primary-color);
+  color: #2563eb;
   display: block;
   margin-bottom: 8px;
 }
 
 .stat-label {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: #6b7280;
   font-weight: 600;
 }
 
-
 /* Responsive Button */
 .btn {
-  background-color: var(--primary-color);
+  background-color: #2563eb;
   color: white;
   padding: 12px 24px;
   border: none;
@@ -113,6 +114,7 @@ nav a {
 .btn:hover {
   background-color: #004fa3;
 }
+
 .intro-horizontal-box {
   display: flex;
   align-items: center;
@@ -120,7 +122,7 @@ nav a {
   background: #fff;
   padding: 30px 40px;
   border-radius: 16px;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   gap: 40px;
   max-width: 1000px;
   margin: 0 auto 40px;
@@ -131,19 +133,16 @@ nav a {
   flex: 1;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: #2563eb;
   margin: 0;
 }
 
 .intro-horizontal-box p {
   flex: 1;
   font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: #6b7280;
   margin: 0;
 }
-
-
-
 
 .features {
   display: flex;
@@ -167,8 +166,13 @@ footer {
   text-align: center;
   padding: 10px 0;
 }
+
 .content {
   padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 80vh;
 }
 
 .job-table {
@@ -185,7 +189,7 @@ footer {
 
 .form {
   max-width: 500px;
-  margin-top: 20px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
 }
@@ -198,6 +202,19 @@ footer {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.form button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.form button:hover {
+  background-color: #2471a3;
 }
 
 .dashboard {
@@ -214,6 +231,7 @@ footer {
   text-align: center;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
+
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -243,6 +261,7 @@ footer {
     font-size: 14px;
   }
 }
+
 .content {
   background-color: #f2f9ff;
   padding: 40px 20px;
@@ -251,22 +270,3 @@ footer {
   max-width: 600px;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
-.form button {
-  background-color: #2980b9;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 10px;
-}
-
-.form button:hover {
-  background-color: #2471a3;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 80vh;
-}
-
