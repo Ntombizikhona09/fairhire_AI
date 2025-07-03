@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Recruitment System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fair Hire AI - Sign Up</title>
 
   <!-- Styles -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
   <header>
@@ -25,73 +25,71 @@
   <section class="content">
     <h2>Create an Account</h2>
     <form class="form" id="signupForm">
-      <label for="firstName">Name:</label>
-      <input type="text" id="firstName" required>
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
 
-      <label for="lastName">Surname:</label>
-      <input type="text" id="lastName" required>
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Choose a username" required />
 
       <label for="email">Email:</label>
-      <input type="email" id="email" required>
+      <input type="email" id="email" placeholder="Enter your email" required />
 
-      <label for="password">Create Password:</label>
-      <input type="password" id="password" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Create a password" required />
 
       <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" required>
+      <input type="password" id="confirmPassword" placeholder="Repeat password" required />
 
       <button type="submit" class="btn">Sign Up</button>
+
+      <p style="margin-top: 15px; text-align: center;">
+        Already have an account?
+        <a href="signin.html" style="color: #2980b9; text-decoration: underline;">Sign In</a>
+      </p>
     </form>
   </section>
 
-  <!-- Firebase SDKs (MUST be before the script that uses them) -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
-  <!-- Firebase Config & App Logic -->
   <script>
-    // ✅ Initialize Firebase AFTER the SDK is loaded
     const firebaseConfig = {
       apiKey: "AIzaSyD4ZsRT-YrTYQHC6_GLmcp88HevsuQTK8w",
       authDomain: "fairhireai-1801f.firebaseapp.com",
       projectId: "fairhireai-1801f",
-      storageBucket: "fairhireai-1801f.appspot.com",
-      messagingSenderId: "834486048706",
       appId: "1:834486048706:web:8b7c847466d5ee43f4e85b",
-      measurementId: "G-BZ7DK84Y7D"
     };
 
     firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-    const signupForm = document.getElementById("signupForm");
-
-    signupForm.addEventListener("submit", async function (e) {
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const firstName = document.getElementById("firstName").value.trim();
-      const lastName = document.getElementById("lastName").value.trim();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const confirmPassword = document.getElementById("confirmPassword").value;
 
       if (password !== confirmPassword) {
-        alert("Passwords do not match.");
+        alert("❌ Passwords do not match.");
         return;
       }
 
       try {
-        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        const user = userCredential.user;
-
-        // Send email verification
-        await user.sendEmailVerification();
-        alert("Account created! A verification link has been sent to your email.");
-
-        signupForm.reset();
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        await userCredential.user.sendEmailVerification();
+        alert("🎉 Registered successfully. Check your email for verification.");
+        window.location.href = "signin.html";
       } catch (error) {
-        alert("Error: " + error.message);
+        console.error(error);
+        alert("Signup failed: " + error.message);
       }
     });
   </script>
+
+  <footer>
+    <p>&copy; 2025 Fair Hire AI. All rights reserved.</p>
+  </footer>
 </body>
 </html>
